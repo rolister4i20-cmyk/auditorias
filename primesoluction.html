@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoria de Inteligência de Conteúdo B2B</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Cabeçalho -->
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-6 mb-8">
+      <div>
+        <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">Relatório Estratégico de Conteúdo</span>
+        <h1 id="client-name" class="text-3xl font-bold mt-1 text-white">Carregando Cliente...</h1>
+        <p id="audit-period" class="text-slate-400 text-sm mt-1">Período analisado</p>
+      </div>
+      <div class="mt-4 md:mt-0 bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg text-right">
+        <span class="text-xs text-slate-400 block">Score de Eficiência</span>
+        <span id="efficiency-score" class="text-2xl font-bold text-emerald-400">--/100</span>
+      </div>
+    </header>
+
+    <!-- KPIs Principais -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+        <p class="text-slate-400 text-xs uppercase">Posts Analisados</p>
+        <p id="kpi-posts" class="text-2xl font-bold mt-2">0</p>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+        <p class="text-slate-400 text-xs uppercase">Engajamento Médio</p>
+        <p id="kpi-engagement" class="text-2xl font-bold mt-2 text-sky-400">0%</p>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+        <p class="text-slate-400 text-xs uppercase">Formato Campeão</p>
+        <p id="kpi-format" class="text-2xl font-bold mt-2 text-amber-400">-</p>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+        <p class="text-slate-400 text-xs uppercase">Gargalo Principal</p>
+        <p id="kpi-bottleneck" class="text-lg font-semibold mt-2 text-rose-400">-</p>
+      </div>
+    </section>
+
+    <!-- Gráficos -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+        <h2 class="text-lg font-semibold mb-4">Performance por Pilar de Conteúdo</h2>
+        <div class="relative h-64 w-full">
+          <canvas id="pillarsChart"></canvas>
+        </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+        <h2 class="text-lg font-semibold mb-4">Retenção & Interação por Formato</h2>
+        <div class="relative h-64 w-full">
+          <canvas id="formatsChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagnóstico e Plano de Ação (Output da IA) -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+        <h2 class="text-lg font-semibold text-rose-400 mb-4">Pontos Cegos Identificados</h2>
+        <ul id="blindspots-list" class="space-y-3 text-sm text-slate-300"></ul>
+      </div>
+      
+      <!-- Container com Paywall Opcional (isPreview) -->
+      <div class="relative bg-slate-900 border border-slate-800 p-6 rounded-xl overflow-hidden">
+        <h2 class="text-lg font-semibold text-emerald-400 mb-4">Plano de Ação Imediato (Próximos 15 dias)</h2>
+        <ul id="actions-list" class="space-y-3 text-sm text-slate-300 transition-all"></ul>
+        
+        <!-- Overlay de Bloqueio para Isca Comercial -->
+        <div id="paywall-overlay" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center">
+          <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-semibold px-3 py-1 rounded-full mb-3">Amostra Gratuita</span>
+          <h3 class="text-lg font-bold text-white mb-2">Desbloqueie o Plano de Ação + 5 Roteiros Prontos</h3>
+          <p class="text-xs text-slate-400 mb-4 max-w-xs">Acesse o diagnóstico completo dos últimos 20 Reels e o passo a passo de correção imediata.</p>
+          <a id="cta-link" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-sm px-5 py-2.5 rounded-lg transition">
+            Liberar Relatório Completo (R$ 197)
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- DADOS INJETADOS PELO N8N -->
+  <script>
+    const REPORT_DATA = {
+  "isPreview": true,
+  "ctaUrl": "https://wa.me/5564993018442?text=Ol%C3%A1!%20Analisei%20os%20gr%C3%A1ficos%20de%20%40primesoluction%20e%20quero%20desbloquear%20o%20plano%20completo%20de%2015%20dias%20(R%24%20197)%20e%20saber%20como%20funciona%20o%20monitoramento%20mensal.",
+  "clientName": "@primesoluction",
+  "auditPeriod": "Últimos 5 Reels analisados",
+  "efficiencyScore": 32,
+  "kpis": {
+    "totalPosts": 5,
+    "avgEngagement": "12.5%",
+    "topFormat": "Reels Curto (<10s)",
+    "mainBottleneck": "Baixo alcance e falta de Copywriting"
+  },
+  "pillarsChart": {
+    "labels": [
+      "Educativo",
+      "Prova Social",
+      "Bastidores",
+      "Oferta"
+    ],
+    "values": [
+      10,
+      5,
+      25,
+      60
+    ]
+  },
+  "formatsChart": {
+    "labels": [
+      "Reels (<30s)",
+      "Reels (>30s)",
+      "Outros"
+    ],
+    "values": [
+      96,
+      24,
+      0
+    ]
+  },
+  "blindSpots": [
+    "Postagens sem legenda em 60% do conteúdo analisado",
+    "Ganchos (hooks) inexistentes nos primeiros 3 segundos",
+    "Falta de nichagem clara entre conteúdo pessoal e corporativo"
+  ],
+  "actionPlan": [
+    "Implementar legendas estratégicas com palavras-chave de TI e Provedores",
+    "Utilizar CTAs diretas para o WhatsApp em todos os posts de serviço",
+    "Criar série 'Dica Técnica' de 15s para aumentar autoridade B2B"
+  ]
+};
+
+    // Popula Textos
+    document.getElementById('client-name').textContent = REPORT_DATA.clientName;
+    document.getElementById('audit-period').textContent = REPORT_DATA.auditPeriod;
+    document.getElementById('efficiency-score').textContent = `${REPORT_DATA.efficiencyScore}/100`;
+    document.getElementById('kpi-posts').textContent = REPORT_DATA.kpis.totalPosts;
+    document.getElementById('kpi-engagement').textContent = REPORT_DATA.kpis.avgEngagement;
+    document.getElementById('kpi-format').textContent = REPORT_DATA.kpis.topFormat;
+    document.getElementById('kpi-bottleneck').textContent = REPORT_DATA.kpis.mainBottleneck;
+
+    // Popula Listas
+    const renderList = (elementId, items, bulletColor) => {
+      const container = document.getElementById(elementId);
+      items.forEach(text => {
+        const li = document.createElement('li');
+        li.className = "flex items-start gap-2";
+        li.innerHTML = `<span class="${bulletColor} font-bold">•</span><span>${text}</span>`;
+        container.appendChild(li);
+      });
+    };
+    renderList('blindspots-list', REPORT_DATA.blindSpots, 'text-rose-400');
+    renderList('actions-list', REPORT_DATA.actionPlan, 'text-emerald-400');
+
+    // Lógica de Paywall (Isca Comercial)
+    if (REPORT_DATA.isPreview) {
+      document.getElementById('actions-list').classList.add('blur-sm', 'select-none');
+      document.getElementById('paywall-overlay').classList.remove('hidden');
+      document.getElementById('cta-link').href = REPORT_DATA.ctaUrl;
+    }
+
+    // Gráfico 1: Pilares
+    new Chart(document.getElementById('pillarsChart'), {
+      type: 'bar',
+      data: {
+        labels: REPORT_DATA.pillarsChart.labels,
+        datasets: [{
+          label: 'Índice de Engajamento',
+          data: REPORT_DATA.pillarsChart.values,
+          backgroundColor: '#10b981',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+                responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+          x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+        }
+      }
+    });
+
+    // Gráfico 2: Formatos
+    new Chart(document.getElementById('formatsChart'), {
+      type: 'doughnut',
+      data: {
+        labels: REPORT_DATA.formatsChart.labels,
+        datasets: [{
+          data: REPORT_DATA.formatsChart.values,
+          
+          backgroundColor: ['#38bdf8', '#f59e0b', '#64748b'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+                responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } }
+      }
+    });
+  </script>
+</body>
+</html>
