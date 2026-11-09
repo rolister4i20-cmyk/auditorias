@@ -3,164 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auditoria de Inteligência de Conteúdo B2B</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased">
-
-  <div class="max-w-6xl mx-auto px-4 py-8">
-    <!-- Cabeçalho -->
-    <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-6 mb-8">
-      <div>
-        <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">Relatório Estratégico de Conteúdo</span>
-        <h1 id="client-name" class="text-3xl font-bold mt-1 text-white">Carregando Cliente...</h1>
-        <p id="audit-period" class="text-slate-400 text-sm mt-1">Período analisado</p>
-      </div>
-      <div class="mt-4 md:mt-0 bg-slate-900 border border-slate-800 px-4 py-2 rounded-lg text-right">
-        <span class="text-xs text-slate-400 block">Score de Eficiência</span>
-        <span id="efficiency-score" class="text-2xl font-bold text-emerald-400">--/100</span>
-      </div>
-    </header>
-
-    <!-- KPIs Principais -->
-    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-        <p class="text-slate-400 text-xs uppercase">Posts Analisados</p>
-        <p id="kpi-posts" class="text-2xl font-bold mt-2">0</p>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-        <p class="text-slate-400 text-xs uppercase">Engajamento Médio</p>
-        <p id="kpi-engagement" class="text-2xl font-bold mt-2 text-sky-400">0%</p>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-        <p class="text-slate-400 text-xs uppercase">Formato Campeão</p>
-        <p id="kpi-format" class="text-2xl font-bold mt-2 text-amber-400">-</p>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-        <p class="text-slate-400 text-xs uppercase">Gargalo Principal</p>
-        <p id="kpi-bottleneck" class="text-lg font-semibold mt-2 text-rose-400">-</p>
-      </div>
-    </section>
-
-    <!-- Gráficos -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
-        <h2 class="text-lg font-semibold mb-4">Performance por Pilar de Conteúdo</h2>
-        <div class="relative h-64 w-full">
-          <canvas id="pillarsChart"></canvas>
-        </div>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
-        <h2 class="text-lg font-semibold mb-4">Retenção & Interação por Formato</h2>
-        <div class="relative h-64 w-full">
-          <canvas id="formatsChart"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diagnóstico e Plano de Ação (Output da IA) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
-        <h2 class="text-lg font-semibold text-rose-400 mb-4">Pontos Cegos Identificados</h2>
-        <ul id="blindspots-list" class="space-y-3 text-sm text-slate-300"></ul>
-      </div>
-      
-      <!-- Container com Paywall Opcional (isPreview) -->
-      <div class="relative bg-slate-900 border border-slate-800 p-6 rounded-xl overflow-hidden">
-         <h3 class="text-lg font-bold text-white mb-2">Desbloqueie o Plano de Ação + 10 Roteiros Prontos</h3>
-          <p class="text-xs text-slate-400 mb-4 max-w-xs">Acesse o diagnóstico completo dos últimos 15 Reels e o passo a passo de correção imediata.</p>
-          <a id="cta-link" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-sm px-5 py-2.5 rounded-lg transition">
-            Liberar Relatório Completo (R$ 297)
-          </a>
-        <ul id="actions-list" class="space-y-3 text-sm text-slate-300 transition-all"></ul>
-        
-        <!-- Overlay de Bloqueio para Isca Comercial -->
-        <div id="paywall-overlay" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center">
-          <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-semibold px-3 py-1 rounded-full mb-3">Amostra Gratuita</span>
-          <h3 class="text-lg font-bold text-white mb-2">Desbloqueie o Plano de Ação + 5 Roteiros Prontos</h3>
-          <p class="text-xs text-slate-400 mb-4 max-w-xs">Acesse o diagnóstico completo dos últimos 20 Reels e o passo a passo de correção imediata.</p>
-          <a id="cta-link" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-sm px-5 py-2.5 rounded-lg transition">
-            Liberar Relatório Completo (R$ 197)
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- DADOS INJETADOS PELO N8N -->
-  <script>
-    const REPORT_DATA = {{JSON_PAYLOAD}};
-
-    // Popula Textos
-    document.getElementById('client-name').textContent = REPORT_DATA.clientName;
-    document.getElementById('audit-period').textContent = REPORT_DATA.auditPeriod;
-    document.getElementById('efficiency-score').textContent = `${REPORT_DATA.efficiencyScore}/100`;
-    document.getElementById('kpi-posts').textContent = REPORT_DATA.kpis.totalPosts;
-    document.getElementById('kpi-engagement').textContent = REPORT_DATA.kpis.avgEngagement;
-    document.getElementById('kpi-format').textContent = REPORT_DATA.kpis.topFormat;
-    document.getElementById('kpi-bottleneck').textContent = REPORT_DATA.kpis.mainBottleneck;
-
-    // Popula Listas
-    const renderList = (elementId, items, bulletColor) => {
-      const container = document.getElementById(elementId);
-      items.forEach(text => {
-        const li = document.createElement('li');
-        li.className = "flex items-start gap-2";
-        li.innerHTML = `<span class="${bulletColor} font-bold">•</span><span>${text}</span>`;
-        container.appendChild(li);
-      });
-    };
-    renderList('blindspots-list', REPORT_DATA.blindSpots, 'text-rose-400');
-    renderList('actions-list', REPORT_DATA.actionPlan, 'text-emerald-400');
-
-    // Lógica de Paywall (Isca Comercial)
-    if (REPORT_DATA.isPreview) {
-      document.getElementById('actions-list').classList.add('blur-sm', 'select-none');
-      document.getElementById('paywall-overlay').classList.remove('hidden');
-      document.getElementById('cta-link').href = REPORT_DATA.ctaUrl;
+  <title>datalab.reels | Pare de Postar no Escuro: Análise Técnica de Reels</title>
+  <style>
+    :root {
+      --bg: #030712;
+      --card: rgba(15, 23, 42, 0.78);
+      --border: rgba(56, 189, 248, 0.22);
+      --emerald: #10b981;
+      --sky: #38bdf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    /* Fundo Animado Cyber Grid + Orbes Neon */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -2;
+      background-image: linear-gradient(to right, rgba(16, 185, 129, 0.07) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+      background-size: 46px 46px;
+      animation: gridMove 18s linear infinite;
+    }
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 46px 46px; }
+    }
+    .orb {
+      position: fixed; border-radius: 50%; filter: blur(95px); z-index: -1; opacity: 0.45;
+      animation: floatOrb 10s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 380px; height: 380px; background: #10b981; top: -80px; left: -60px; }
+    .orb-2 { width: 420px; height: 420px; background: #38bdf8; bottom: -100px; right: -80px; animation-delay: 3s; }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 45px) scale(1.12); }
+    }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-wrap {
+      max-width: 1140px; margin: 0 auto; padding: 14px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+    .brand-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; }
+    .brand-name span { background: linear-gradient(90deg, var(--emerald), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .btn-top {
+      background: linear-gradient(90deg, var(--emerald), #059669);
+      color: #020617; font-weight: 800; font-size: 0.85rem;
+      padding: 10px 18px; border-radius: 10px; text-decoration: none;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35); transition: 0.25s;
+    }
+    .btn-top:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(16, 185, 129, 0.6); }
+    .container { max-width: 1140px; margin: 0 auto; padding: 56px 20px; }
+    .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
+    @media (max-width: 880px) { .hero { grid-template-columns: 1fr; } }
+    .badge {
+      display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--emerald); background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 6px 14px; border-radius: 99px; margin-bottom: 18px;
+    }
+    h1 { font-size: clamp(2.1rem, 4vw, 3.3rem); line-height: 1.12; font-weight: 900; margin-bottom: 18px; }
+    h1 span { background: linear-gradient(90deg, var(--emerald), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: var(--muted); font-size: 1.08rem; line-height: 1.6; margin-bottom: 28px; }
+    .stats-row { display: flex; gap: 24px; flex-wrap: wrap; }
+    .stat-box { background: var(--card); border: 1px solid rgba(255,255,255,0.08); padding: 14px 18px; border-radius: 12px; }
+    .stat-box strong { display: block; font-size: 1.35rem; color: var(--sky); }
+    .stat-box span { font-size: 0.78rem; color: var(--muted); }
+    /* Formulário Neon Interativo */
+    .form-card {
+      background: var(--card); backdrop-filter: blur(18px);
+      border: 1px solid var(--border); border-radius: 20px; padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(56, 189, 248, 0.12);
+    }
+    .form-card h2 { font-size: 1.35rem; margin-bottom: 6px; }
+    .form-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+    .field { margin-bottom: 15px; }
+    .field label { display: block; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; }
+    .field input, .field select {
+      width: 100%; padding: 12px 14px; border-radius: 10px;
+      background: rgba(2, 6, 23, 0.9); border: 1px solid #334155; color: #fff; font-size: 0.95rem;
+      outline: none; transition: 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: var(--emerald); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
+    .btn-submit {
+      width: 100%; padding: 15px; border: none; border-radius: 12px; cursor: pointer;
+      background: linear-gradient(90deg, var(--emerald), var(--sky));
+      color: #020617; font-weight: 900; font-size: 1rem; margin-top: 6px;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); transition: 0.25s;
+    }
+    .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 72px; }
+    .feature {
+      background: var(--card); border: 1px solid rgba(255,255,255,0.08);
+      padding: 26px; border-radius: 16px; transition: 0.25s;
+    }
+    .feature:hover { border-color: var(--emerald); transform: translateY(-4px); }
+    .feature .tag { color: var(--emerald); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; }
+    .feature h3 { margin: 10px 0 8px; font-size: 1.15rem; }
+    .feature p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+    footer { text-align: center; padding: 36px 20px; border-top: 1px solid rgba(255,255,255,0.07); color: var(--muted); font-size: 0.82rem; margin-top: 60px; }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-    // Gráfico 1: Pilares
-    new Chart(document.getElementById('pillarsChart'), {
-      type: 'bar',
-      data: {
-        labels: REPORT_DATA.pillarsChart.labels,
-        datasets: [{
-          label: 'Índice de Engajamento',
-          data: REPORT_DATA.pillarsChart.values,
-          backgroundColor: '#10b981',
-          borderRadius: 6
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-                responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
-          x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
-        }
-      }
-    });
+  <header>
+    <div class="nav-wrap">
+      <a href="#" class="brand">
+        <!-- Logo SVG Vetorial Nativa (Nunca quebra e brilha em qualquer tela) -->
+        <svg width="42" height="42" viewBox="0 0 64 64" fill="none" xmlns="http://w3.org">
+          <defs>
+            <linearGradient id="dlGrad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="16" fill="#0f172a" stroke="url(#dlGrad)" stroke-width="2.5"/>
+          <path d="M18 46L30 18L36 32L46 20" stroke="url(#dlGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="46" cy="20" r="4" fill="#38bdf8"/>
+          <path d="M23 38H38" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+        <div class="brand-name">datalab<span>.reels</span></div>
+      </a>
+      <a href="#solicitar" class="btn-top">Solicitar Raio-X</a>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="badge">Inteligência de Retenção com IA</span>
+        <h1>Pare de postar no escuro e <span>destrave as vendas</span> dos seus Reels.</h1>
+        <p class="subtitle">
+          Mapeamos os últimos 15 vídeos do seu Instagram, identificamos onde o público abandona nos primeiros 3 segundos e entregamos um painel interativo + 5 roteiros prontos para converter.
+        </p>
+        <div class="stats-row">
+          <div class="stat-box"><strong>15 Reels</strong><span>Auditados em profundidade</span></div>
+          <div class="stat-box"><strong>5 Roteiros</strong><span>Prontos com ganchos de retenção</span></div>
+          <div class="stat-box"><strong>Zero Senha</strong><span>100% via métricas públicas</span></div>
+        </div>
+      </div>
 
-    // Gráfico 2: Formatos
-    new Chart(document.getElementById('formatsChart'), {
-      type: 'doughnut',
-      data: {
-        labels: REPORT_DATA.formatsChart.labels,
-        datasets: [{
-          data: REPORT_DATA.formatsChart.values,
-          
-          backgroundColor: ['#38bdf8', '#f59e0b', '#64748b'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-                responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } }
-      }
+      <div class="form-card" id="solicitar">
+        <h2>Gerar Diagnóstico Completo</h2>
+        <p>Preencha os dados abaixo para iniciar a auditoria do seu perfil (Investimento único: R$ 197).</p>
+        <form id="auditForm">
+          <div class="field">
+            <label>Seu @ do Instagram *</label>
+            <input type="text" id="igUser" placeholder="Ex: @suaclinica ou @seuperfil" required>
+          </div>
+          <div class="field">
+            <label>Principal Objetivo Hoje *</label>
+            <select id="igGoal">
+              <option value="Atrair clientes e vender mais">Atrair clientes e vender mais</option>
+              <option value="Sair da trava de visualizações">Sair da trava de visualizações</option>
+              <option value="Superar concorrentes do nicho">Superar concorrentes do nicho</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Perfil de 1 Concorrente (Opcional)</label>
+            <input type="text" id="igComp" placeholder="Ex: @concorrente">
+          </div>
+          <button type="submit" class="btn-submit">Solicitar Auditoria + 5 Roteiros →</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="grid-3">
+      <div class="feature">
+        <span class="tag">01 • Leitura Algorítmica</span>
+        <h3>Score Real de Eficiência</h3>
+        <p>Cruzamos views, engajamento e duração dos seus últimos 15 vídeos para revelar quais formatos realmente retêm compradores.</p>
+      </div>
+      <div class="feature">
+        <span class="tag">02 • Diagnóstico de Falhas</span>
+        <h3>Pontos Cegos de Retenção</h3>
+        <p>Mostramos exatamente por que as pessoas passam direto pelo seu vídeo nos primeiros 3 segundos e como corrigir a chamada para ação.</p>
+      </div>
+      <div class="feature">
+        <span class="tag">03 • Execução Imediata</span>
+        <h3>Plano de 15 Dias + Roteiros</h3>
+        <p>Você recebe um link exclusivo com gráficos interativos e 5 roteiros estruturados linha por linha para gravar e postar.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>datalab.reels</strong> • Inteligência de Dados e Retenção B2B • Instagram: @datalab.reels
+  </footer>
+
+  <script>
+    document.getElementById('auditForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('igUser').value.trim();
+      const goal = document.getElementById('igGoal').value;
+      const comp = document.getElementById('igComp').value.trim() || 'Não informado';
+      const text = `Olá! Preenchi o formulário no site datalab.reels e quero solicitar a Auditoria Completa + 5 Roteiros (R$ 197).\n\n• Perfil: ${user}\n• Objetivo: ${goal}\n• Concorrente: ${comp}`;
+      const base = "https:" + "//wa.me/5564993018442?text=";
+      window.open(base + encodeURIComponent(text), '_blank');
     });
   </script>
 </body>
