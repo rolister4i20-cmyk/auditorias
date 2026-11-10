@@ -493,6 +493,50 @@
       document.querySelector('#amostra h2').innerHTML = d.simH2;
       document.querySelector('#comparativo .badge').textContent = d.compBadge;
       document.querySelector('#comparativo h2').innerHTML = d.compH2;
+            const compRows = {
+        en: [
+          ['Performance Criteria', 'Posting Without Data (Amateur)', 'With datalab.reels Audit'],
+          ['First 3 Seconds', 'Slow greetings and intros that kill reach', 'Validated visual and verbal hooks to retain buyers'],
+          ['Topic Selection', 'Based on guesswork or trends that bring browsers', 'Based on pillars that actually generate leads'],
+          ['Scripting', 'Hours stuck on camera not knowing what to say', '10 full scripts delivered line by line within 24h'],
+          ['Account Safety', 'Invasive tools asking for login and risking bans', '100% safe: analysis done strictly on public metrics']
+        ],
+        es: [
+          ['Criterio de Rendimiento', 'Producción Sin Datos (Amateur)', 'Con Auditoría datalab.reels'],
+          ['Primeros 3 Segundos', 'Saludos lentos e intros que derrumban el alcance', 'Ganchos visuales y verbales validados para retener'],
+          ['Elección de Temas', 'Basada en suposiciones o trends de curiosos', 'Basada en pilares que realmente generan clientes'],
+          ['Guiones', 'Horas frente a la cámara sin saber qué decir', '10 guiones completos línea por línea en 24h'],
+          ['Seguridad de Cuenta', 'Herramientas que piden clave y arriesgan bloqueo', '100% seguro: análisis sobre métricas públicas']
+        ]
+      };
+      document.querySelectorAll('.comp-table tr').forEach((tr, rIdx) => {
+        if (compRows[l] && compRows[l][rIdx]) {
+          tr.querySelectorAll('th, td').forEach((cell, cIdx) => {
+            if (compRows[l][rIdx][cIdx]) cell.textContent = compRows[l][rIdx][cIdx];
+          });
+        }
+      });
+      const simBtns = document.querySelectorAll('.tab-btn');
+      if (simBtns[0] && simBtns[1]) {
+        simBtns[0].textContent = l === 'en' ? '🦷 Dental & Aesthetic Clinic' : '🦷 Clínica Dental / Estética';
+        simBtns[1].textContent = l === 'en' ? '⚖️ Law Firm' : '⚖️ Despacho de Abogados';
+      }
+      if (l === 'en') {
+        document.getElementById('simSub').textContent = '15 Reels analyzed • Benchmark applied';
+        document.getElementById('p1Name').textContent = 'Behind the Scenes & Procedure';
+        document.getElementById('p2Name').textContent = 'Objection Handling';
+        document.getElementById('p3Name').textContent = 'Generic Institutional';
+        document.getElementById('simAlert').innerHTML = '<strong>⚠️ Critical Bottleneck:</strong> 60% of videos start with "Hi everyone", losing 71% of viewers before 3 seconds.';
+        document.getElementById('simScript').innerHTML = '<strong>[00s-03s Hook]:</strong> Show before/after with on-screen text: <em>"3 mistakes that stain your veneers in under 1 year"</em>.<br><br><strong>[03s-25s Retention]:</strong> Explain care mistake #1 without technical jargon.<br><br><strong>[25s-30s CTA]:</strong> <em>"Click the bio link to book your evaluation."</em>';
+      } else if (l === 'es') {
+        document.getElementById('simSub').textContent = '15 Reels analizados • Benchmark aplicado';
+        document.getElementById('p1Name').textContent = 'Detrás de Cámaras y Procedimiento';
+        document.getElementById('p2Name').textContent = 'Manejo de Objeciones';
+        document.getElementById('p3Name').textContent = 'Institucional Genérico';
+        document.getElementById('simAlert').innerHTML = '<strong>⚠️ Cuello de Botella:</strong> 60% de los videos empiezan con "Hola a todos", perdiendo 71% de audiencia antes de 3s.';
+        document.getElementById('simScript').innerHTML = '<strong>[00s-03s Gancho]:</strong> Muestra antes/después con texto: <em>"3 errores que manchan tus carillas en menos de 1 año"</em>.<br><br><strong>[03s-25s Retención]:</strong> Explica el error #1 sin tecnicismos.<br><br><strong>[25s-30s CTA]:</strong> <em>"Haz clic en el enlace de la bio y agenda tu valoración."</em>';
+      }
+
       document.querySelector('#faq .badge').textContent = d.faqBadge;
       document.querySelector('#faq h2').innerHTML = d.faqH2;
       document.querySelectorAll('.faq-item').forEach((item, i) => {
