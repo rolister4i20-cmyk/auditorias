@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="B1aiPkczJDYxuYNaJafGnjSrefop0W1mfmVZq6FVqw" />
-    <title>datalab.reels — Inteligência de Retenção &amp; Conversão para Reels</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23020617'/%3E%3Cpath d='M18 44V28m14 16V18m14 26V24' stroke='%2310b981' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='16' r='4' fill='%2338bdf8'/%3E%3C/svg%3E">
-
+  <title>DataLab Reels — Inteligência de Retenção &amp; Conversão</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071024' stroke='%231e293b' stroke-width='3'/%3E%3Crect x='14' y='16' width='36' height='7' rx='3.5' fill='%2310b981' opacity='0.35'/%3E%3Crect x='14' y='16' width='24' height='7' rx='3.5' fill='%2310b981'/%3E%3Crect x='14' y='28.5' width='36' height='7' rx='3.5' fill='%2338bdf8'/%3E%3Crect x='14' y='41' width='36' height='7' rx='3.5' fill='%2364748b' opacity='0.45'/%3E%3Crect x='14' y='41' width='21' height='7' rx='3.5' fill='%2364748b'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23071024'/%3E%3Cpolygon points='29,26 39,32 29,38' fill='%2310b981'/%3E%3C/svg%3E">
   <style>
     :root {
       --bg: #030712;
@@ -163,9 +162,21 @@
   <div class="orb orb-2"></div>
   <header>
     <div class="nav-wrap">
-      <a href="#topo" class="brand">
-        <div class="brand-name">datalab<span>.reels</span></div>
+         <a href="#topo" class="brand" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+        <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://w3.org">
+          <rect width="64" height="64" rx="16" fill="#071024" stroke="#1e293b" stroke-width="3"/>
+          <rect x="14" y="16" width="36" height="7" rx="3.5" fill="#10b981" fill-opacity="0.35"/>
+          <rect x="14" y="16" width="24" height="7" rx="3.5" fill="#10b981"/>
+          <rect x="14" y="28.5" width="36" height="7" rx="3.5" fill="#38bdf8"/>
+          <rect x="14" y="41" width="36" height="7" rx="3.5" fill="#64748b" fill-opacity="0.45"/>
+          <rect x="14" y="41" width="21" height="7" rx="3.5" fill="#64748b"/>
+          <circle cx="32" cy="32" r="11" fill="#071024"/>
+          <polygon points="29,26 39,32 29,38" fill="#10b981"/>
+        </svg>
+        <div class="brand-name">DataLab<span>.reels</span></div>
       </a>
+
+
       <nav class="nav-links">
         <a href="#como-funciona">Como Funciona</a>
         <a href="#amostra">Simulador Real</a>
@@ -469,7 +480,7 @@
       const d = i18n[l];
       if (!d) return;
       localStorage.setItem('dl_lang', l);
-          document.title = l === 'en' ? 'datalab.reels — Reels Retention & Growth Intelligence' : 'datalab.reels — Inteligencia de Retención y Conversión para Reels';
+                document.title = l === 'en' ? 'DataLab Reels — Retention & Conversion Intelligence' : 'DataLab Reels — Inteligencia de Retención y Conversión';
 
       document.querySelectorAll('.nav-links a').forEach((a, i) => { if (d.nav[i]) a.textContent = d.nav[i]; });
       document.querySelector('.btn-top').textContent = d.ctaTop;
