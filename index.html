@@ -531,7 +531,7 @@
 "Saudações lentas e introduções que derrubam a entrega": "Saludos lentos e intros que derrumban el alcance",
 "Ganchos visuais e verbais validados para reter compradores": "Ganchos visuales y verbales validados para retener",
 "Escolha de Temas": "Elección de Temas",
-"Baseada em "achismo" ou trends que só trazem curiosos": "Basada en suposiciones o trends que traen curiosos",
+"Baseada em \"achismo\" ou trends que só trazem curiosos": "Basada en suposiciones o trends que traen curiosos",
 "Baseada nos pilares que realmente geraram engajamento e leads": "Basada en pilares que realmente generan clientes",
 "Roteirização": "Guiones",
 "Horas travado na frente da câmera sem saber o que falar": "Horas frente a la cámara sin saber qué decir",
@@ -548,33 +548,65 @@
 "R$ 297": "US$ 97",
 "R$ 497/mês": "US$ 147/mes"
 };
+// Salva os textos originais em PT na primeira vez para trocar livremente sem recarregar a página
+const originalNodes = [];
+function captureOriginalTexts() {
+  if (originalNodes.length > 0) return;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node.parentElement && !['SCRIPT', 'STYLE'].includes(node.parentElement.tagName)) {
+      if (node.nodeValue.trim().length > 0) {
+        originalNodes.push({ node, original: node.nodeValue });
+      }
+    }
+  }
+}
+
 function setLang(l) {
-if (l === 'pt') { localStorage.setItem('dl_lang', 'pt'); location.reload(); return; }
-localStorage.setItem('dl_lang', l);
-document.title = l === 'en' ? 'DataLab Reels — Retention & Conversion Intelligence' : 'DataLab Reels — Inteligencia de Retención y Conversión';
-const map = l === 'en' ? dictEN : dictES;
-if (!map) return;
-const headEl = document.querySelector('header');
-const mainEl = document.querySelector('main');
-for (const [pt, tr] of Object.entries(map)) {
-headEl.innerHTML = headEl.innerHTML.split(pt).join(tr);
-mainEl.innerHTML = mainEl.innerHTML.split(pt).join(tr);
+  captureOriginalTexts();
+  localStorage.setItem('dl_lang', l);
+
+  // Atualiza estado visual dos botões PT / EN / ES
+  document.querySelectorAll('header button').forEach(btn => {
+    const txt = btn.textContent.trim().toLowerCase();
+    if (['pt', 'en', 'es'].includes(txt)) {
+      btn.classList.toggle('active', txt === l);
+    }
+  });
+
+  // Restaura textos originais em PT primeiro
+  originalNodes.forEach(item => {
+    item.node.nodeValue = item.original;
+  });
+
+  // Aplica tradução EN ou ES se não for PT
+  if (l !== 'pt') {
+    const map = l === 'en' ? dictEN : dictES;
+    if (map) {
+      originalNodes.forEach(item => {
+        let text = item.node.nodeValue;
+        for (const [pt, tr] of Object.entries(map)) {
+          if (text.includes(pt)) {
+            text = text.split(pt).join(tr);
+          }
+        }
+        item.node.nodeValue = text;
+      });
+    }
+  }
+
+  // Atualiza placeholders dos inputs
+  const userInp = document.getElementById('igUser');
+  const compInp = document.getElementById('igComp');
+  if (userInp) {
+    userInp.placeholder = l === 'en' ? 'Ex: @yourclinic' : l === 'es' ? 'Ej: @tuclinica' : 'Ex: @suaclinica';
+  }
+  if (compInp) {
+    compInp.placeholder = l === 'en' ? 'Ex: @competitor' : l === 'es' ? 'Ej: @competidor' : 'Ex: @concorrente';
+  }
 }
-const userInp = document.getElementById('igUser');
-const compInp = document.getElementById('igComp');
-if (userInp) userInp.placeholder = l === 'en' ? 'Ex: @yourclinic' : 'Ej: @tuclinica';
-if (compInp) compInp.placeholder = l === 'en' ? 'Ex: @competitor' : 'Ej: @competidor';
-document.getElementById('auditForm').addEventListener('submit', function(e) {
-e.preventDefault();
-const user = document.getElementById('igUser').value.trim();
-const plan = document.getElementById('igPlan').value;
-const comp = document.getElementById('igComp').value.trim() || 'N/A';
-const text = l === 'en'
-? Hi! I filled out the form on datalab.reels and want to request my audit:\n\n• Handle: ${user}\n• Plan: ${plan}\n• Competitor: ${comp}
-: ¡Hola! Completé el formulario en datalab.reels y quiero solicitar mi diagnóstico:\n\n• Perfil: ${user}\n• Plan: ${plan}\n• Competidor: ${comp};
-window.location.href = "https:" + "//wa.me/5564993018442?text=" + encodeURIComponent(text);
-});
-}
+
 (function autoDetectLang() {
 const saved = localStorage.getItem('dl_lang');
 if (saved) { if (saved !== 'pt') setLang(saved); return; }
@@ -584,5 +616,6 @@ else if (nav.startsWith('en')) setLang('en');
 })();
 
   </script>
+
 </body>
 </html>
