@@ -209,7 +209,7 @@
       const comp = document.getElementById('igComp').value.trim() || 'Não informado';
       const text = `Olá! Preenchi o formulário no site datalab.reels e quero solicitar a Auditoria Completa + 10 Roteiros (R$ 297).\n\n• Perfil: ${user}\n• Objetivo: ${goal}\n• Concorrente: ${comp}`;
       const base = "https:" + "//wa.me/5564993018442?text=";
-      window.open(base + encodeURIComponent(text), '_blank');
+      window.location.href = base + encodeURIComponent(text);
     });
   </script>
 </body>
