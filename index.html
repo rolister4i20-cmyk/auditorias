@@ -169,6 +169,11 @@
         <a href="#comparativo">Antes vs. Depois</a>
         <a href="#faq">Dúvidas</a>
       </nav>
+            <div style="display:flex; gap:6px; align-items:center;">
+        <button onclick="setLang('pt')" style="background:#0f172a; border:1px solid #334155; color:#fff; padding:5px 9px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700;">PT</button>
+        <button onclick="setLang('en')" style="background:#0f172a; border:1px solid #334155; color:#fff; padding:5px 9px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700;">EN</button>
+        <button onclick="setLang('es')" style="background:#0f172a; border:1px solid #334155; color:#fff; padding:5px 9px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700;">ES</button>
+      </div>
       <a href="#solicitar" class="btn-top">Solicitar Raio-X</a>
     </div>
   </header>
@@ -375,6 +380,136 @@
     function toggleFaq(btn) {
       btn.parentElement.classList.toggle('open');
     }
+  </script>
+      <script>
+    const i18n = {
+      en: {
+        nav: ['How It Works', 'Live Demo', 'Before vs. After', 'FAQ'],
+        ctaTop: 'Request Audit',
+        badgeHero: 'B2B Retention & Conversion Intelligence',
+        h1: 'Stop posting in the dark and <span class="grad">unlock sales</span> from your Reels.',
+        lead: 'We audit your last 15 videos, benchmark your top competitor, and deliver an interactive dashboard + 10 ready-to-shoot scripts to attract real clients.',
+        stats: [
+          ['15 Reels', 'Mapped in full depth'],
+          ['10 Scripts', 'Ready with hooks & CTAs'],
+          ['Zero Password', '100% public data analysis']
+        ],
+        formTitle: 'Generate Full Audit',
+        formSub: 'Select your plan and enter your handle to start within 24h.',
+        labels: ['Your Instagram @ *', 'Audit Plan *', '1 Direct Competitor (Optional)'],
+        opts: [
+          'Single: 15 Reels Audit + 10 Scripts (US$ 97)',
+          'Agencies: White-Label 10 Clients/mo (US$ 147/mo)'
+        ],
+        btn: 'Request My Dashboard on WhatsApp →',
+        trust: '🔒 We never ask for your Instagram login or password.',
+        steps: [
+          ['Step 01 • Data Mining', 'Last 15 Videos X-Ray', 'We extract performance, duration, and real retention patterns from your profile and compare them with your niche leader.'],
+          ['Step 02 • Retention Engineering', 'Blind Spot Mapping', 'We pinpoint why viewers swipe away in the first 3 seconds and which topics attract browsers instead of buyers.'],
+          ['Step 03 • Guided Execution', 'Live Dashboard + 10 Scripts', 'You receive a private link with interactive charts, a 15-day action plan, and 10 line-by-line scripts ready to record.']
+        ],
+        simBadge: 'Interactive Demo',
+        simH2: 'See what you get <span class="grad">inside your dashboard</span>',
+        compBadge: 'Operational Impact',
+        compH2: 'Posting Blindly vs. <span class="grad">DataLab Protocol</span>',
+        faqBadge: 'FAQ',
+        faqH2: 'Common questions before <span class="grad">ordering</span>',
+        faqs: [
+          ['Do you need my Instagram password?', 'No. We never ask for your password or admin access. Our engine analyzes only public metrics from your last 15 Reels and competitor, keeping your account 100% safe.'],
+          ['How fast do I receive my dashboard and 10 scripts?', 'Once confirmed on WhatsApp, your full audit is delivered within 24 hours via a private interactive link that works on mobile and desktop.'],
+          ['Does it work for smaller accounts?', 'Yes. As long as your account is public and has at least 10 to 15 Reels published, our engine maps retention patterns and builds 10 custom scripts for your niche.'],
+          ['How does the Agency White-Label Plan (US$ 147/mo) work?', 'Marketing agencies and social media managers get up to 10 full audits per month without our branding in the footer, ready to present as your own proprietary intelligence.']
+        ]
+      },
+      es: {
+        nav: ['Cómo Funciona', 'Simulador Real', 'Antes vs. Después', 'Dudas'],
+        ctaTop: 'Solicitar Auditoría',
+        badgeHero: 'Inteligencia de Retención y Conversión B2B',
+        h1: 'Deja de publicar a ciegas y <span class="grad">desbloquea ventas</span> con tus Reels.',
+        lead: 'Auditamos tus últimos 15 videos, comparamos con tu competidor principal y entregamos un panel interactivo + 10 guiones listos para atraer clientes reales.',
+        stats: [
+          ['15 Reels', 'Analizados en profundidad'],
+          ['10 Guiones', 'Listos con gancho y CTA'],
+          ['Cero Contraseña', '100% vía datos públicos']
+        ],
+        formTitle: 'Generar Diagnóstico Completo',
+        formSub: 'Selecciona tu plan e ingresa tu perfil para iniciar en 24h.',
+        labels: ['Tu @ de Instagram *', 'Modalidad *', '1 Competidor Directo (Opcional)'],
+        opts: [
+          'Individual: Auditoría 15 Reels + 10 Guiones (US$ 97)',
+          'Agencias: Paquete White-Label 10 Clientes/mes (US$ 147/mes)'
+        ],
+        btn: 'Solicitar Mi Panel por WhatsApp →',
+        trust: '🔒 Nunca pedimos usuario ni contraseña de tu Instagram.',
+        steps: [
+          ['Paso 01 • Lectura de Datos', 'Rayos-X de los Últimos 15 Videos', 'Recopilamos rendimiento, duración y patrones reales de retención de tu perfil y los comparamos con el líder de tu nicho.'],
+          ['Paso 02 • Ingeniería de Retención', 'Mapeo de Puntos Ciegos', 'Identificamos exactamente por qué la audiencia desliza en los primeros 3 segundos y qué temas atraen curiosos en lugar de compradores.'],
+          ['Paso 03 • Ejecución Guiada', 'Panel Online + 10 Guiones', 'Recibes un enlace exclusivo con gráficos interactivos, plan de 15 días y 10 guiones línea por línea listos para grabar.']
+        ],
+        simBadge: 'Demostración Interactiva',
+        simH2: 'Mira lo que recibes <span class="grad">por dentro del panel</span>',
+        compBadge: 'Impacto Operacional',
+        compH2: 'Publicar a Ciegas vs. <span class="grad">Protocolo DataLab</span>',
+        faqBadge: 'Preguntas Frecuentes',
+        faqH2: 'Resuelve tus dudas antes de <span class="grad">solicitar</span>',
+        faqs: [
+          ['¿Necesitan la contraseña de mi Instagram?', 'No. Nunca pedimos tu contraseña ni acceso administrativo. Nuestra inteligencia analiza exclusivamente datos públicos de tus últimos 15 Reels, garantizando 100% de seguridad.'],
+          ['¿En cuánto tiempo recibo mi panel y los 10 guiones?', 'Tras confirmar por WhatsApp, el diagnóstico completo queda listo en menos de 24 horas en un enlace exclusivo e interactivo para celular o computadora.'],
+          ['¿Funciona si mi perfil aún es pequeño?', 'Sí. Basta con que el perfil sea público y tenga al menos 10 a 15 Reels publicados para cruzar patrones de retención y generar los 10 guiones personalizados.'],
+          ['¿Cómo funciona el Paquete White-Label para Agencias (US$ 147/mes)?', 'Agencias de marketing y community managers reciben hasta 10 auditorías completas al mes sin nuestra marca en el pie de página, listas para presentar a sus clientes.']
+        ]
+      }
+    };
+
+    function setLang(l) {
+      if (l === 'pt') { localStorage.setItem('dl_lang', 'pt'); location.reload(); return; }
+      const d = i18n[l];
+      if (!d) return;
+      localStorage.setItem('dl_lang', l);
+      document.querySelectorAll('.nav-links a').forEach((a, i) => { if (d.nav[i]) a.textContent = d.nav[i]; });
+      document.querySelector('.btn-top').textContent = d.ctaTop;
+      document.querySelector('.hero .badge').textContent = d.badgeHero;
+      document.querySelector('h1').innerHTML = d.h1;
+      document.querySelector('.hero .lead').textContent = d.lead;
+      document.querySelectorAll('.stat-box').forEach((box, i) => {
+        if (d.stats[i]) { box.querySelector('strong').textContent = d.stats[i][0]; box.querySelector('span').textContent = d.stats[i][1]; }
+      });
+      document.querySelector('.form-card h3').textContent = d.formTitle;
+      document.querySelector('.form-card p').textContent = d.formSub;
+      document.querySelectorAll('.form-card label').forEach((lb, i) => { if (d.labels[i]) lb.textContent = d.labels[i]; });
+      const opts = document.querySelectorAll('#igPlan option');
+      if (opts[0]) { opts[0].textContent = d.opts[0]; opts[0].value = d.opts[0]; }
+      if (opts[1]) { opts[1].textContent = d.opts[1]; opts[1].value = d.opts[1]; }
+      document.querySelector('.btn-submit').textContent = d.btn;
+      document.querySelector('.trust-note').textContent = d.trust;
+      document.querySelectorAll('.step-card').forEach((card, i) => {
+        if (d.steps[i]) {
+          card.querySelector('.step-num').textContent = d.steps[i][0];
+          card.querySelector('h3').textContent = d.steps[i][1];
+          card.querySelector('p').textContent = d.steps[i][2];
+        }
+      });
+      document.querySelector('#amostra .badge').textContent = d.simBadge;
+      document.querySelector('#amostra h2').innerHTML = d.simH2;
+      document.querySelector('#comparativo .badge').textContent = d.compBadge;
+      document.querySelector('#comparativo h2').innerHTML = d.compH2;
+      document.querySelector('#faq .badge').textContent = d.faqBadge;
+      document.querySelector('#faq h2').innerHTML = d.faqH2;
+      document.querySelectorAll('.faq-item').forEach((item, i) => {
+        if (d.faqs[i]) {
+          item.querySelector('.faq-q').childNodes[0].nodeValue = d.faqs[i][0] + ' ';
+          item.querySelector('.faq-a').textContent = d.faqs[i][1];
+        }
+      });
+    }
+
+    (function autoDetectLang() {
+      const saved = localStorage.getItem('dl_lang');
+      if (saved) { if (saved !== 'pt') setLang(saved); return; }
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (navLang.startsWith('es')) setLang('es');
+      else if (navLang.startsWith('en')) setLang('en');
+    })();
   </script>
 </body>
 </html>
