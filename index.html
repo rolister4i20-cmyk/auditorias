@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="B1aiPkczJDYxuYNaJafGnjSrefop0W1mfmVZq6FVqw" />
+    <title>datalab.reels — Inteligência de Retenção &amp; Conversão para Reels</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23020617'/%3E%3Cpath d='M18 44V28m14 16V18m14 26V24' stroke='%2310b981' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='16' r='4' fill='%2338bdf8'/%3E%3C/svg%3E">
+
   <style>
     :root {
       --bg: #030712;
@@ -466,6 +469,8 @@
       const d = i18n[l];
       if (!d) return;
       localStorage.setItem('dl_lang', l);
+          document.title = l === 'en' ? 'datalab.reels — Reels Retention & Growth Intelligence' : 'datalab.reels — Inteligencia de Retención y Conversión para Reels';
+
       document.querySelectorAll('.nav-links a').forEach((a, i) => { if (d.nav[i]) a.textContent = d.nav[i]; });
       document.querySelector('.btn-top').textContent = d.ctaTop;
       document.querySelector('.hero .badge').textContent = d.badgeHero;
