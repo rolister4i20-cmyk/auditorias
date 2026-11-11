@@ -1,621 +1,270 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="B1aiPkczJDYxuYNaJafGnjSrefop0W1mfmVZq6FVqw" />
-    <title>DataLab Reels — Inteligência de Retenção &amp; Conversão</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23071024'/><rect x='14' y='16' width='36' height='7' rx='3.5' fill='%2310b981'/><rect x='14' y='28.5' width='36' height='7' rx='3.5' fill='%2338bdf8'/><rect x='14' y='41' width='36' height='7' rx='3.5' fill='%2364748b'/><circle cx='32' cy='32' r='11' fill='%23071024'/><polygon points='29,26 39,32 29,38' fill='%2310b981'/></svg>">
-
-
-
-  <style>
-    :root {
-      --bg: #030712;
-      --surface: rgba(15, 23, 42, 0.82);
-      --surface-solid: #0f172a;
-      --border: rgba(56, 189, 248, 0.22);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --emerald: #10b981;
-      --emerald-dark: #059669;
-      --sky: #38bdf8;
-      --rose: #f43f5e;
-      --amber: #f59e0b;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background-color: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.55; }
-
-    /* Fundo Animado Cyber Grid + Orbes */
-    .bg-grid {
-      position: fixed; inset: 0; z-index: -2;
-      background-image: linear-gradient(to right, rgba(16, 185, 129, 0.06) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
-      background-size: 48px 48px;
-      animation: gridMove 20s linear infinite;
-    }
-    @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 48px 48px; } }
-    .orb { position: fixed; border-radius: 50%; filter: blur(110px); z-index: -1; opacity: 0.38; animation: floatOrb 12s ease-in-out infinite alternate; }
-    .orb-1 { width: 420px; height: 420px; background: var(--emerald); top: -100px; left: -80px; }
-    .orb-2 { width: 450px; height: 450px; background: var(--sky); bottom: -120px; right: -80px; animation-delay: 4s; }
-    @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, 50px) scale(1.1); } }
-
-    /* Header Fixo */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .nav-wrap { max-width: 1160px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
-    .brand-name { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.5px; }
-    .brand-name span { background: linear-gradient(90deg, var(--emerald), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav-links { display: flex; gap: 24px; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: 0.2s; }
-    .nav-links a:hover { color: #fff; }
-    @media (max-width: 768px) { .nav-links { display: none; } }
-    .btn-top {
-      background: linear-gradient(90deg, var(--emerald), var(--emerald-dark));
-      color: #020617; font-weight: 800; font-size: 0.85rem; padding: 10px 18px; border-radius: 10px;
-      text-decoration: none; box-shadow: 0 0 20px rgba(16, 185, 129, 0.35); transition: 0.2s; white-space: nowrap;
-    }
-    .btn-top:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(16, 185, 129, 0.6); }
-
-    /* Layout & Tipografia */
-    .container { max-width: 1160px; margin: 0 auto; padding: 48px 20px; }
-    section { scroll-margin-top: 90px; }
-    .sec-header { text-align: center; max-width: 720px; margin: 0 auto 44px; }
-    .badge {
-      display: inline-block; font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--emerald); background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35);
-      padding: 6px 14px; border-radius: 99px; margin-bottom: 14px;
-    }
-    h1 { font-size: clamp(2.1rem, 4vw, 3.35rem); line-height: 1.12; font-weight: 900; margin-bottom: 18px; letter-spacing: -1px; }
-    h2 { font-size: clamp(1.65rem, 3vw, 2.35rem); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
-    .grad { background: linear-gradient(90deg, var(--emerald), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .lead { color: var(--muted); font-size: 1.05rem; }
-
-    /* Hero + Formulário */
-    .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; padding-top: 12px; }
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
-    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
-    @media (max-width: 520px) { .stats-row { grid-template-columns: 1fr; } }
-    .stat-box { background: var(--surface); border: 1px solid var(--border-subtle); padding: 14px 16px; border-radius: 14px; }
-    .stat-box strong { display: block; font-size: 1.25rem; color: var(--sky); font-weight: 800; }
-    .stat-box span { font-size: 0.78rem; color: var(--muted); }
-
-    .form-card {
-      background: var(--surface); backdrop-filter: blur(20px); border: 1px solid var(--border);
-      border-radius: 22px; padding: 30px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(56, 189, 248, 0.12);
-    }
-    .form-card h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 6px; }
-    .form-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
-    .field { margin-bottom: 14px; }
-    .field label { display: block; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; }
-    .field input, .field select {
-      width: 100%; padding: 12px 14px; border-radius: 10px; background: rgba(2, 6, 23, 0.92);
-      border: 1px solid #334155; color: #fff; font-size: 0.94rem; outline: none; transition: 0.2s;
-    }
-    .field input:focus, .field select:focus { border-color: var(--emerald); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
-    .btn-submit {
-      width: 100%; padding: 15px; border: none; border-radius: 12px; cursor: pointer;
-      background: linear-gradient(90deg, var(--emerald), var(--sky)); color: #020617;
-      font-weight: 900; font-size: 1rem; margin-top: 8px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); transition: 0.25s;
-    }
-    .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.08); }
-    .trust-note { text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 12px; }
-
-    /* Etapas Como Funciona */
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-top: 80px; }
-    .step-card { background: var(--surface); border: 1px solid var(--border-subtle); padding: 28px; border-radius: 18px; transition: 0.25s; }
-    .step-card:hover { border-color: var(--emerald); transform: translateY(-4px); }
-    .step-num { color: var(--emerald); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-    .step-card h3 { font-size: 1.15rem; margin: 10px 0 8px; }
-    .step-card p { color: var(--muted); font-size: 0.9rem; }
-
-    /* Simulador Interativo de Amostra */
-    .sim-section { margin-top: 90px; }
-    .tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
-    .tab-btn {
-      background: var(--surface-solid); border: 1px solid #334155; color: var(--muted);
-      padding: 10px 22px; border-radius: 99px; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: 0.2s;
-    }
-    .tab-btn.active { background: rgba(16, 185, 129, 0.15); border-color: var(--emerald); color: #fff; }
-    .sim-box {
-      background: var(--surface-solid); border: 1px solid var(--border); border-radius: 22px;
-      padding: 32px; box-shadow: 0 25px 60px rgba(0,0,0,0.65);
-    }
-    .sim-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px; margin-bottom: 24px; }
-    .sim-score { background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.4); padding: 10px 20px; border-radius: 14px; text-align: right; }
-    .sim-score span { display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--emerald); font-weight: 700; }
-    .sim-score strong { font-size: 1.7rem; color: #fff; }
-    .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    @media (max-width: 820px) { .sim-grid { grid-template-columns: 1fr; } }
-    .sim-panel { background: #020617; border: 1px solid #1e293b; padding: 22px; border-radius: 16px; }
-    .sim-panel h4 { font-size: 0.92rem; color: var(--sky); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .bar-row { margin-bottom: 14px; }
-    .bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 5px; color: #cbd5e1; }
-    .bar-track { height: 8px; background: #1e293b; border-radius: 99px; overflow: hidden; }
-    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--emerald), var(--sky)); border-radius: 99px; transition: width 0.5s ease; }
-    .blind-spot { background: rgba(244, 63, 94, 0.1); border-left: 3px solid var(--rose); padding: 12px 14px; border-radius: 8px; font-size: 0.85rem; color: #fecdd3; margin-bottom: 12px; }
-    .script-preview { background: rgba(16, 185, 129, 0.08); border: 1px dashed rgba(16, 185, 129, 0.45); padding: 14px; border-radius: 10px; font-size: 0.84rem; color: #d1fae5; }
-
-    /* Tabela Comparativa & FAQ */
-    .comp-section { margin-top: 90px; }
-    .comp-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 18px; overflow: hidden; border: 1px solid var(--border-subtle); }
-    .comp-table th, .comp-table td { padding: 18px 22px; text-align: left; border-bottom: 1px solid var(--border-subtle); font-size: 0.92rem; }
-    .comp-table th { background: #020617; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-    .bad { color: #fda4af; }
-.good { color: #6ee7b7; font-weight: 600; }
-    .faq-section { margin-top: 90px; max-width: 820px; margin-left: auto; margin-right: auto; }
-    .faq-item { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
-    .faq-q { width: 100%; background: none; border: none; color: #fff; text-align: left; padding: 18px 22px; font-size: 0.98rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-a { padding: 12px 22px 18px; color: var(--muted); font-size: 0.9rem; display: none; border-top: 1px solid rgba(255,255,255,0.04); }
-    .faq-item.open .faq-a { display: block; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--emerald); }
-    .faq-icon { font-size: 1.3rem; transition: 0.2s; color: var(--sky); }
-    footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-subtle); color: var(--muted); font-size: 0.84rem; margin-top: 90px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#030712">
+<meta name="google-site-verification" content="B1aiPkczJDYxuYNaJafGnjSrefop0W1mfmVZq6FVqw">
+<title>DataLab Reels — Auditoria de Reels com 10 roteiros prontos</title>
+<meta name="description" content="Auditoria dos seus últimos 15 Reels com painel interativo, pontos cegos e 10 roteiros prontos para gravar. Só dados públicos, sem senha. Entrega em até 24h.">
+<meta property="og:title" content="DataLab Reels — descubra o que trava as vendas dos seus Reels">
+<meta property="og:description" content="Painel interativo + plano de 15 dias + 10 roteiros prontos. Sem senha, só dados públicos.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://datalab-reels.pages.dev/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://datalab-reels.pages.dev/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071024'/%3E%3Crect x='14' y='16' width='36' height='7' rx='3.5' fill='%2310b981'/%3E%3Crect x='14' y='28.5' width='36' height='7' rx='3.5' fill='%2338bdf8'/%3E%3Crect x='14' y='41' width='36' height='7' rx='3.5' fill='%2364748b'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23071024'/%3E%3Cpath d='M29 26l10 6-10 6z' fill='%2310b981'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--bg:#030712;--card:rgba(15,23,42,.8);--solid:#0f172a;--bd:rgba(56,189,248,.22);--bd2:rgba(255,255,255,.08);--em:#10b981;--em2:#059669;--sky:#38bdf8;--rose:#f43f5e;--tx:#f8fafc;--mu:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;overflow-x:hidden;padding-bottom:70px}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 400px at 10% -5%,rgba(16,185,129,.22),transparent),radial-gradient(600px 450px at 95% 105%,rgba(56,189,248,.2),transparent),linear-gradient(rgba(16,185,129,.05) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(56,189,248,.05) 1px,transparent 1px) 0 0/48px 48px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:72px 0;scroll-margin-top:70px}
+.grad{background:linear-gradient(90deg,var(--em),var(--sky));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.badge{display:inline-block;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--em);background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);padding:6px 14px;border-radius:99px;margin-bottom:14px}
+h1{font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;font-weight:900;letter-spacing:-1px;margin-bottom:16px}
+h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;line-height:1.2;margin-bottom:10px}
+.lead{color:var(--mu);font-size:1.07rem;max-width:580px}
+.head{text-align:center;max-width:720px;margin:0 auto 40px}
+.head p{color:var(--mu)}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(3,7,18,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd2)}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:900;font-size:1.25rem;letter-spacing:-.5px}
+.nav-l{display:flex;gap:22px}.nav-l a{color:var(--mu);text-decoration:none;font-size:.88rem;font-weight:600}.nav-l a:hover{color:#fff}
+.nav-r{display:flex;gap:8px;align-items:center}
+.lang{display:flex;border:1px solid #334155;border-radius:8px;overflow:hidden}
+.lang button{background:var(--solid);border:0;color:var(--mu);padding:6px 10px;font-size:.74rem;font-weight:800;cursor:pointer}
+.lang button[aria-pressed=true]{background:rgba(16,185,129,.2);color:#fff}
+.btn{display:inline-block;text-align:center;text-decoration:none;border:0;cursor:pointer;font-weight:800;border-radius:12px;padding:13px 22px;font-size:.95rem;background:linear-gradient(90deg,var(--em),var(--sky));color:#020617;box-shadow:0 8px 26px rgba(16,185,129,.35);transition:transform .2s,filter .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.sm{padding:9px 16px;font-size:.84rem;border-radius:10px}
+.btn.ghost{background:transparent;color:#fff;border:1px solid #475569;box-shadow:none}
+@media(max-width:820px){.nav-l{display:none}}
+@media(max-width:480px){.nav-r .btn{display:none}}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:48px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--bd2);border-radius:14px;padding:12px 14px}
+.stat b{display:block;font-size:1.2rem;color:var(--sky)}.stat span{font-size:.76rem;color:var(--mu)}
+.form{background:var(--card);backdrop-filter:blur(18px);border:1px solid var(--bd);border-radius:22px;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,.7),0 0 35px rgba(56,189,248,.12)}
+.form h3{font-size:1.3rem;margin-bottom:4px}.form>p{font-size:.85rem;color:var(--mu);margin-bottom:18px}
+.field{margin-bottom:13px}.field label{display:block;font-size:.8rem;font-weight:600;color:#cbd5e1;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 14px;border-radius:10px;background:#020617;border:1px solid #334155;color:#fff;font-size:1rem}
+.field input:focus,.field select:focus{border-color:var(--em);outline:0;box-shadow:0 0 0 3px rgba(16,185,129,.22)}
+.form .btn{width:100%;margin-top:6px;padding:15px}
+.note{text-align:center;font-size:.76rem;color:var(--mu);margin-top:11px}
+/* steps */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--bd2);border-radius:18px;padding:26px;transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--em);transform:translateY(-4px)}
+.card small{color:var(--em);font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:.74rem}
+.card h3{font-size:1.12rem;margin:9px 0 7px}.card p{color:var(--mu);font-size:.9rem}
+/* demo */
+.demo{background:var(--solid);border:1px solid var(--bd);border-radius:22px;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,.6)}
+.demo-top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--bd2);padding-bottom:20px;margin-bottom:22px}
+.ring{--v:76;width:88px;height:88px;border-radius:50%;background:conic-gradient(var(--em) calc(var(--v)*1%),#1e293b 0);display:grid;place-items:center}
+.ring div{width:68px;height:68px;border-radius:50%;background:var(--solid);display:grid;place-items:center;font-size:1.3rem;font-weight:900}
+.ill{font-size:.72rem;color:#fbbf24;border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.08);padding:4px 10px;border-radius:99px;font-weight:700}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:820px){.dg{grid-template-columns:1fr}}
+.panel{background:#020617;border:1px solid #1e293b;border-radius:16px;padding:20px}
+.panel h4{font-size:.85rem;color:var(--sky);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.bar{margin-bottom:13px}.bar div:first-child{display:flex;justify-content:space-between;font-size:.82rem;color:#cbd5e1;margin-bottom:5px}
+.trk{height:8px;background:#1e293b;border-radius:99px;overflow:hidden}.trk i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--em),var(--sky))}
+.blind{background:rgba(244,63,94,.1);border-left:3px solid var(--rose);padding:12px 14px;border-radius:8px;font-size:.85rem;color:#fecdd3}
+.scr{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.35);border-left:4px solid var(--sky);padding:14px;border-radius:10px;font-size:.85rem;color:#e0f2fe}
+.lock{position:relative;margin-top:12px;filter:blur(4px);user-select:none;pointer-events:none;font-size:.85rem;color:#cbd5e1}
+.lockwrap{position:relative}.lockwrap span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:.85rem;z-index:2}
+/* compare */
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--bd2);border-radius:18px;overflow:hidden;min-width:560px}
+th,td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--bd2);font-size:.9rem}
+th{background:#020617;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--mu)}
+.bad{color:#fda4af}.good{color:#6ee7b7;font-weight:600}
+/* pricing */
+.price{display:flex;flex-direction:column}
+.price.hot{border-color:var(--em);box-shadow:0 0 40px rgba(16,185,129,.18)}
+.tag{align-self:flex-start;background:var(--em);color:#020617;font-size:.7rem;font-weight:900;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-bottom:10px}
+.amt{font-size:2.3rem;font-weight:900;margin:6px 0 2px}.amt small{font-size:.9rem;color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0}
+.price ul{list-style:none;margin:16px 0 22px;flex:1}.price li{font-size:.9rem;color:#cbd5e1;padding:6px 0 6px 24px;position:relative}
+.price li:before{content:"✓";position:absolute;left:0;color:var(--em);font-weight:900}
+/* faq */
+.faq{max-width:820px;margin:0 auto}
+.fi{background:var(--card);border:1px solid var(--bd2);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.fq{width:100%;background:none;border:0;color:#fff;text-align:left;padding:18px 22px;font-size:.98rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;gap:12px}
+.fq i{font-style:normal;font-size:1.3rem;color:var(--sky);transition:transform .2s}
+.fa{display:none;padding:2px 22px 18px;color:var(--mu);font-size:.9rem}
+.fi.open .fa{display:block}.fi.open .fq i{transform:rotate(45deg);color:var(--em)}
+/* final */
+.final{text-align:center;background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(56,189,248,.12));border:1px solid var(--bd);border-radius:24px;padding:48px 24px}
+footer{border-top:1px solid var(--bd2);padding:32px 0;text-align:center;color:var(--mu);font-size:.84rem}
+footer a{color:var(--sky)}
+/* sticky mobile */
+#sb{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(3,7,18,.95);backdrop-filter:blur(12px);border-top:1px solid var(--bd);transform:translateY(110%);transition:transform .3s}
+#sb.on{transform:none}#sb .btn{width:100%}
+@media(min-width:821px){#sb{display:none}body{padding-bottom:0}}
+#solicitar{scroll-margin-top:90px}.micro{font-size:.8rem;color:var(--mu);margin-bottom:6px}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.js .rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <header>
-    <div class="nav-wrap">
-         <a href="#topo" class="brand" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
-        <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://w3.org">
-          <rect width="64" height="64" rx="16" fill="#071024" stroke="#1e293b" stroke-width="3"/>
-          <rect x="14" y="16" width="36" height="7" rx="3.5" fill="#10b981" fill-opacity="0.35"/>
-          <rect x="14" y="16" width="24" height="7" rx="3.5" fill="#10b981"/>
-          <rect x="14" y="28.5" width="36" height="7" rx="3.5" fill="#38bdf8"/>
-          <rect x="14" y="41" width="36" height="7" rx="3.5" fill="#64748b" fill-opacity="0.45"/>
-          <rect x="14" y="41" width="21" height="7" rx="3.5" fill="#64748b"/>
-          <circle cx="32" cy="32" r="11" fill="#071024"/>
-          <polygon points="29,26 39,32 29,38" fill="#10b981"/>
-        </svg>
-        <div class="brand-name">DataLab<span>.reels</span></div>
-      </a>
+<header><div class="wrap nav">
+  <a href="#topo" class="brand" aria-label="DataLab Reels">
+    <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#071024" stroke="#1e293b" stroke-width="3"/><rect x="14" y="16" width="24" height="7" rx="3.5" fill="#10b981"/><rect x="14" y="28.5" width="36" height="7" rx="3.5" fill="#38bdf8"/><rect x="14" y="41" width="21" height="7" rx="3.5" fill="#64748b"/><circle cx="32" cy="32" r="11" fill="#071024"/><path d="M29 26l10 6-10 6z" fill="#10b981"/></svg>
+    <span>DataLab<span class="grad">.reels</span></span></a>
+  <nav class="nav-l" aria-label="Principal">
+    <a href="#como" data-en="How it works" data-es="Cómo funciona">Como funciona</a><a href="#amostra" data-en="Example" data-es="Ejemplo">Exemplo</a><a href="#planos" data-en="Pricing" data-es="Precios">Planos</a><a href="#faq" data-en="FAQ" data-es="Dudas">Dúvidas</a></nav>
+  <div class="nav-r">
+    <div class="lang" role="group" aria-label="Idioma / Language"><button data-l="pt" onclick="setLang('pt')" aria-pressed="true">PT</button><button data-l="en" onclick="setLang('en')" aria-pressed="false">EN</button><button data-l="es" onclick="setLang('es')" aria-pressed="false">ES</button></div>
+    <a href="#solicitar" class="btn sm" data-en="Get my audit" data-es="Quiero mi auditoría">Quero minha auditoria</a>
+  </div>
+</div></header>
 
-
-      <nav class="nav-links">
-        <a href="#como-funciona">Como Funciona</a>
-        <a href="#amostra">Simulador Real</a>
-        <a href="#comparativo">Antes vs. Depois</a>
-        <a href="#faq">Dúvidas</a>
-      </nav>
-            <div style="display:flex; gap:6px; align-items:center;">
-        <button onclick="setLang('pt')" style="background:#0f172a; border:1px solid #334155; color:#fff; padding:5px 9px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700;">PT</button>
-        <button onclick="setLang('en')" style="background:#0f172a; border:1px solid #334155; color:#fff; padding:5px 9px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700;">EN</button>
-        <button onclick="setLang('es')" style="background:#0f172a; border:1px solid #334155; color:#fff; padding:5px 9px; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:700;">ES</button>
-      </div>
-      <a href="#solicitar" class="btn-top">Solicitar Raio-X</a>
+<main id="topo">
+<div class="wrap">
+<section class="hero" style="padding-bottom:40px">
+  <div>
+    <span class="badge" data-en="Reels audit for businesses &amp; agencies" data-es="Auditoría de Reels para empresas y agencias">Auditoria de Reels para empresas e agências</span>
+    <h1 data-en="Stop posting in the dark. <span class='grad'>See what blocks sales</span> on your Reels and get 10 scripts ready to shoot." data-es="Deja de publicar a ciegas. <span class='grad'>Descubre qué frena las ventas</span> de tus Reels y recibe 10 guiones listos para grabar."> Pare de postar no escuro. <span class="grad">Veja o que trava as vendas</span> dos seus Reels e receba 10 roteiros prontos para gravar.</h1>
+    <p class="lead" data-en="We analyze your last 15 Reels from public data and deliver an interactive dashboard, your blind spots, a 15-day plan and 10 scripts with hooks and CTAs." data-es="Analizamos tus últimos 15 Reels con datos públicos y entregamos un panel interactivo, tus puntos ciegos, un plan de 15 días y 10 guiones con gancho y CTA.">Analisamos seus últimos 15 Reels a partir de dados públicos e entregamos um painel interativo, seus pontos cegos, um plano de 15 dias e 10 roteiros com gancho e CTA.</p>
+    <div class="cta-row">
+      <a href="#solicitar" class="btn" data-en="Get my free preview →" data-es="Quiero mi vista previa gratis →">Quero minha prévia grátis →</a>
+      <a href="#amostra" class="btn ghost" data-en="See an example" data-es="Ver un ejemplo">Ver um exemplo</a>
     </div>
-  </header>
-    <main class="container" id="topo">
-    <section class="hero">
-      <div>
-        <span class="badge">Inteligência de Retenção & Conversão B2B</span>
-        <h1>Pare de postar no escuro e <span class="grad">destrave as vendas</span> dos seus Reels.</h1>
-        <p class="lead">Auditamos os últimos 15 vídeos do seu perfil, cruzamos métricas com seu principal concorrente e entregamos um painel interativo + 10 roteiros prontos para atrair clientes reais.</p>
-        <div class="stats-row">
-          <div class="stat-box"><strong>15 Reels</strong><span>Mapeados em profundidade</span></div>
-          <div class="stat-box"><strong>10 Roteiros</strong><span>Prontos com gancho e CTA</span></div>
-          <div class="stat-box"><strong>Zero Senha</strong><span>100% via dados públicos</span></div>
-        </div>
-      </div>
-      <div class="form-card" id="solicitar">
-        <h3>Gerar Diagnóstico Completo</h3>
-        <p>Selecione seu plano e informe seu perfil para iniciarmos a análise em até 24h.</p>
-        <form id="auditForm">
-          <div class="field"><label>Seu @ do Instagram *</label><input type="text" id="igUser" placeholder="Ex: @suaclinica" required></div>
-          <div class="field"><label>Modalidade *</label><select id="igPlan"><option value="Individual R$ 297">Individual: Raio-X 15 Reels + 10 Roteiros (R$ 297)</option><option value="Agencia R$ 497/mes">Agências: Pacote White-Label 10 Clientes/mês (R$ 497/mês)</option></select></div>
-          <div class="field"><label>1 Concorrente Direto (Opcional)</label><input type="text" id="igComp" placeholder="Ex: @concorrente"></div>
-          <button type="submit" class="btn-submit">Solicitar Meu Painel no WhatsApp →</button>
-          <div class="trust-note">🔒 Não pedimos login nem senha do seu Instagram.</div>
-        </form>
-      </div>
-    </section>
-    <section id="como-funciona">
-      <div class="steps-grid">
-        <div class="step-card">
-          <span class="step-num">Etapa 01 • Leitura de Dados</span>
-          <h3>Raio-X dos Últimos 15 Vídeos</h3>
-          <p>Coletamos performance, duração e engajamento real do seu perfil e comparamos com o líder do seu nicho.</p>
-        </div>
-        <div class="step-card">
-          <span class="step-num">Etapa 02 • Retenção</span>
-          <h3>Mapeamento de Pontos Cegos</h3>
-          <p>Identificamos exatamente por que o público desliza nos primeiros 3 segundos e quais temas trazem compradores.</p>
-        </div>
-        <div class="step-card">
-          <span class="step-num">Etapa 03 • Execução</span>
-          <h3>Painel Online + 10 Roteiros</h3>
-          <p>Você recebe um link exclusivo com gráficos interativos, plano de 15 dias e 10 roteiros prontos para gravar.</p>
-        </div>
-      </div>
-    </section>
-    <section class="sim-section" id="amostra">
-      <div class="sec-header">
-        <span class="badge">Demonstração Interativa</span>
-        <h2>Veja o que você recebe <span class="grad">por dentro do painel</span></h2>
-      </div>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="setSim('clinica', this)">🦷 Clínica Odontológica / Estética</button>
-        <button class="tab-btn" onclick="setSim('adv', this)">⚖️ Escritório de Advocacia</button>
-      </div>
-      <div class="sim-box">
-        <div class="sim-top">
-          <div>
-            <h3 id="simTitle">@clinica.estetica_exemplo</h3>
-            <p id="simSub" style="font-size:0.85rem; color:var(--muted);">15 Reels analisados • Benchmark aplicado</p>
-          </div>
-          <div class="sim-score"><span>Score</span><strong id="simScore">76 / 100</strong></div>
-        </div>
-        <div class="sim-grid">
-          <div class="sim-panel">
-            <h4>Retenção por Pilar</h4>
-            <div class="bar-row"><div class="bar-label"><span id="p1Name">Bastidores & Procedimento</span><strong id="p1Val">62%</strong></div><div class="bar-track"><div class="bar-fill" id="p1Bar" style="width:62%"></div></div></div>
-            <div class="bar-row"><div class="bar-label"><span id="p2Name">Quebra de Objeção</span><strong id="p2Val">26%</strong></div><div class="bar-track"><div class="bar-fill" id="p2Bar" style="width:26%"></div></div></div>
-            <div class="bar-row"><div class="bar-label"><span id="p3Name">Institucional Genérico</span><strong id="p3Val">12%</strong></div><div class="bar-track"><div class="bar-fill" id="p3Bar" style="width:12%"></div></div></div>
-            <div class="blind-spot" id="simAlert"><strong>⚠️ Gargalo Crítico:</strong> 60% dos vídeos começam com "Olá pessoal", perdendo 71% da audiência antes dos 3 segundos.</div>
-          </div>
-          <div class="sim-panel">
-            <h4>Amostra de Roteiro Corrigido</h4>
-            <div class="script-preview" id="simScript"><strong>[00s-03s Gancho]:</strong> Mostre o antes/depois com texto: <em>"3 erros que fazem sua lente manchar em 1 ano"</em>.<br><br><strong>[03s-25s Retenção]:</strong> Explique o erro #1 de higienização sem termos técnicos.<br><br><strong>[25s-30s CTA]:</strong> <em>"Clique no link da bio e agende sua avaliação."</em></div>
-          </div>
-        </div>
-      </div>
-    </section>
-      <!-- COMPARATIVO ANTES VS DEPOIS -->
-    <section class="comp-section" id="comparativo">
-      <div class="sec-header">
-        <span class="badge">Impacto Operacional</span>
-        <h2>Postar no Escuro vs. <span class="grad">Protocolo DataLab</span></h2>
-      </div>
-      <div style="overflow-x:auto;">
-        <table class="comp-table">
-          <thead>
-            <tr>
-              <th>Critério de Performance</th>
-              <th>Produção Sem Dados (Amador)</th>
-              <th>Com Auditoria datalab.reels</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Primeiros 3 Segundos</strong></td>
-              <td class="bad">Saudações lentas e introduções que derrubam a entrega</td>
-              <td class="good">Ganchos visuais e verbais validados para reter compradores</td>
-            </tr>
-            <tr>
-              <td><strong>Escolha de Temas</strong></td>
-              <td class="bad">Baseada em "achismo" ou trends que só trazem curiosos</td>
-              <td class="good">Baseada nos pilares que realmente geraram engajamento e leads</td>
-            </tr>
-            <tr>
-              <td><strong>Roteirização</strong></td>
-              <td class="bad">Horas travado na frente da câmera sem saber o que falar</td>
-              <td class="good">10 roteiros completos entregues linha por linha em até 24h</td>
-            </tr>
-            <tr>
-              <td><strong>Segurança da Conta</strong></td>
-              <td class="bad">Ferramentas invasivas que pedem login e arriscam bloqueio</td>
-              <td class="good">100% seguro: análise feita exclusivamente sobre métricas públicas</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <p class="micro" data-en="Free preview, no card and no password." data-es="Vista previa gratis, sin tarjeta y sin contraseña.">Prévia grátis, sem cartão e sem senha.</p>
+    <div class="stats">
+      <div class="stat"><b>15</b><span data-en="Reels analyzed" data-es="Reels analizados">Reels analisados</span></div>
+      <div class="stat"><b>10</b><span data-en="Scripts ready to shoot" data-es="Guiones listos para grabar">Roteiros prontos</span></div>
+      <div class="stat"><b>24h</b><span data-en="Delivery time" data-es="Plazo de entrega">Prazo de entrega</span></div>
+      <div class="stat"><b data-en="No login" data-es="Sin contraseña">Sem senha</b><span data-en="Public data only" data-es="Solo datos públicos">Só dados públicos</span></div>
+    </div>
+  </div>
+  <div class="form" id="solicitar">
+    <h3 data-en="Start your audit" data-es="Empieza tu auditoría">Comece sua auditoria</h3>
+    <p data-en="Tell us your profile and pick an option. We continue on WhatsApp." data-es="Indícanos tu perfil y elige una opción. Continuamos por WhatsApp.">Informe seu perfil e escolha uma opção. Continuamos pelo WhatsApp.</p>
+    <form id="f">
+      <div class="field"><label for="u" data-en="Your Instagram @ *" data-es="Tu @ de Instagram *">Seu @ do Instagram *</label><input id="u" required autocomplete="off" autocapitalize="none" placeholder="@suaclinica" data-en-ph="@yourbusiness" data-es-ph="@tunegocio"></div>
+      <div class="field"><label for="p" data-en="Option *" data-es="Opción *">Opção *</label>
+        <select id="p"><option value="free" data-en="Free preview (charts + blind spots)" data-es="Vista previa gratis (gráficos + puntos ciegos)">Prévia grátis (gráficos + pontos cegos)</option><option value="single" data-en="Full audit: 15-day plan + 10 scripts (US$ 67)" data-es="Auditoría completa: plan de 15 días + 10 guiones (US$ 67)">Auditoria completa: plano de 15 dias + 10 roteiros (R$ 297)</option><option value="agency" data-en="Agencies: white-label, up to 10 audits/mo (US$ 147/mo)" data-es="Agencias: marca blanca, hasta 10 auditorías/mes (US$ 147/mes)">Agências: white-label, até 10 auditorias/mês (R$ 497/mês)</option></select></div>
+      <div class="field"><label for="c" data-en="Direct competitor (optional)" data-es="Competidor directo (opcional)">Concorrente direto (opcional)</label><input id="c" autocomplete="off" autocapitalize="none" placeholder="@concorrente" data-en-ph="@competitor" data-es-ph="@competidor"></div>
+      <button class="btn" type="submit" data-en="Continue on WhatsApp →" data-es="Continuar por WhatsApp →">Continuar no WhatsApp →</button>
+      <div class="note" data-en="🔒 We never ask for your Instagram login or password." data-es="🔒 Nunca pedimos tu usuario ni tu contraseña de Instagram.">🔒 Nunca pedimos login ou senha do seu Instagram.</div>
+    </form><noscript><p class="note"><a href="https://wa.me/5564993018442">WhatsApp: +55 64 99301-8442</a></p></noscript>
+  </div>
+</section>
 
-    <!-- FAQ ACORDEÃO -->
-    <section class="faq-section" id="faq">
-      <div class="sec-header">
-        <span class="badge">Perguntas Frequentes</span>
-        <h2>Tire suas dúvidas antes de <span class="grad">solicitar</span></h2>
-      </div>
+<section id="como"><div class="head rv"><span class="badge" data-en="How it works" data-es="Cómo funciona">Como funciona</span><h2 data-en="From your profile to scripts in <span class='grad'>3 steps</span>" data-es="De tu perfil a los guiones en <span class='grad'>3 pasos</span>">Do seu perfil aos roteiros em <span class="grad">3 passos</span></h2></div>
+  <div class="grid3">
+    <div class="card rv"><small data-en="Step 01 • Data" data-es="Paso 01 • Datos">Passo 01 • Dados</small><h3 data-en="X-ray of your last 15 Reels" data-es="Rayos X de tus últimos 15 Reels">Raio-X dos seus últimos 15 Reels</h3><p data-en="We collect views, likes, comments and format from your public profile." data-es="Recopilamos vistas, me gusta, comentarios y formato de tu perfil público.">Coletamos visualizações, curtidas, comentários e formato do seu perfil público.</p></div>
+    <div class="card rv"><small data-en="Step 02 • Diagnosis" data-es="Paso 02 • Diagnóstico">Passo 02 • Diagnóstico</small><h3 data-en="Blind spots and winning topics" data-es="Puntos ciegos y temas que funcionan">Pontos cegos e temas que funcionam</h3><p data-en="We show which topics and formats bring more engagement and which mistakes hold your Reels back." data-es="Mostramos qué temas y formatos generan más interacción y qué errores frenan tus Reels.">Mostramos quais temas e formatos geram mais engajamento e quais erros seguram seus Reels.</p></div>
+    <div class="card rv"><small data-en="Step 03 • Action" data-es="Paso 03 • Acción">Passo 03 • Ação</small><h3 data-en="Dashboard + 10 scripts" data-es="Panel + 10 guiones">Painel online + 10 roteiros</h3><p data-en="You get a private link with charts, a 15-day plan and 10 scripts ready to record." data-es="Recibes un enlace privado con gráficos, un plan de 15 días y 10 guiones listos para grabar.">Você recebe um link privado com gráficos, plano de 15 dias e 10 roteiros prontos para gravar.</p></div>
+  </div></section>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Vocês precisam da senha do meu Instagram? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Não. Nunca pedimos sua senha ou acesso administrativo. Nossa inteligência analisa exclusivamente os dados públicos dos seus últimos 15 Reels e do concorrente informado, garantindo 100% de segurança para sua conta.</div>
-      </div>
+<section id="amostra"><div class="head rv"><span class="badge" data-en="Example report" data-es="Ejemplo de informe">Exemplo de relatório</span><h2 data-en="See what you get <span class='grad'>inside the dashboard</span>" data-es="Mira lo que recibes <span class='grad'>dentro del panel</span>">Veja o que você recebe <span class="grad">por dentro do painel</span></h2></div>
+  <div class="demo rv">
+    <div class="demo-top"><div><h3>@clinica.exemplo</h3><p style="font-size:.85rem;color:var(--mu)" data-en="15 Reels analyzed" data-es="15 Reels analizados">15 Reels analisados</p><span class="ill" data-en="Illustrative example • fictional data" data-es="Ejemplo ilustrativo • datos ficticios">Exemplo ilustrativo • dados fictícios</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="text-align:right;font-size:.78rem;color:var(--mu)" data-en="Efficiency score" data-es="Puntuación de eficiencia">Score de<br>eficiência</div><div class="ring" role="img" aria-label="76 de 100"><div>76</div></div></div></div>
+    <div class="dg">
+      <div class="panel"><h4 data-en="Engagement by pillar" data-es="Interacción por pilar">Engajamento por pilar</h4>
+        <div class="bar"><div><span data-en="Behind the scenes" data-es="Detrás de cámaras">Bastidores</span><b>62%</b></div><div class="trk"><i style="width:62%"></i></div></div>
+        <div class="bar"><div><span data-en="Objection handling" data-es="Manejo de objeciones">Quebra de objeção</span><b>26%</b></div><div class="trk"><i style="width:26%"></i></div></div>
+        <div class="bar"><div><span data-en="Generic institutional" data-es="Institucional genérico">Institucional genérico</span><b>12%</b></div><div class="trk"><i style="width:12%"></i></div></div>
+        <div class="blind" data-en="<b>⚠️ Blind spot:</b> videos that open with a long greeting tend to lose attention right at the start." data-es="<b>⚠️ Punto ciego:</b> los videos que empiezan con un saludo largo tienden a perder la atención desde el inicio.">
+          <b>⚠️ Ponto cego:</b> vídeos que abrem com saudação longa tendem a perder a atenção logo no início.</div></div>
+      <div class="panel"><h4 data-en="Script sample" data-es="Muestra de guion">Amostra de roteiro</h4>
+        <div class="scr" data-en="<b>Hook (0–3s):</b> “3 mistakes that stain your contact lenses in a year.”<br><b>Body:</b> explain mistake #1 in plain words.<br><b>CTA:</b> “Book your evaluation via the link in bio.”" data-es="<b>Gancho (0–3 s):</b> “3 errores que manchan tus lentes de contacto en un año.”<br><b>Cuerpo:</b> explica el error n.º 1 con palabras simples.<br><b>CTA:</b> “Agenda tu evaluación en el enlace de la bio.”"><b>Gancho (0–3s):</b> “3 erros que fazem sua lente manchar em 1 ano.”<br><b>Corpo:</b> explique o erro #1 em linguagem simples.<br><b>CTA:</b> “Agende sua avaliação pelo link da bio.”</div>
+        <div class="lockwrap"><div class="lock" aria-hidden="true">Roteiro 2: •••••••• ••••• ••••••<br>Roteiro 3: ••••••• •••• ••••••••</div><span data-en="🔒 9 more scripts in the full audit" data-es="🔒 9 guiones más en la auditoría completa">🔒 +9 roteiros na auditoria completa</span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:24px"><a href="#solicitar" class="btn" data-en="I want this for my profile →" data-es="Quiero esto para mi perfil →">Quero isso para o meu perfil →</a></div>
+  </div></section>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Em quanto tempo recebo meu painel e os 10 roteiros? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Após a confirmação do pedido no WhatsApp, o diagnóstico completo fica pronto em até 24 horas. Você recebe um link exclusivo e interativo que pode ser aberto no celular ou computador.</div>
-      </div>
+<section id="comparativo"><div class="head rv"><span class="badge" data-en="Before vs. after" data-es="Antes vs. después">Antes vs. depois</span><h2 data-en="Posting blindly vs. <span class='grad'>posting with data</span>" data-es="Publicar a ciegas vs. <span class='grad'>publicar con datos</span>">Postar no escuro vs. <span class="grad">postar com dados</span></h2></div>
+  <div class="tw rv"><table><thead><tr><th data-en="Criteria" data-es="Criterio">Critério</th><th data-en="Without data" data-es="Sin datos">Sem dados</th><th data-en="With DataLab audit" data-es="Con auditoría DataLab">Com auditoria DataLab</th></tr></thead><tbody>
+    <tr><td><b data-en="First 3 seconds" data-es="Primeros 3 segundos">Primeiros 3 segundos</b></td><td class="bad" data-en="Slow greetings and generic intros" data-es="Saludos lentos e intros genéricas">Saudações lentas e introduções genéricas</td><td class="good" data-en="Hooks based on what already works for you" data-es="Ganchos basados en lo que ya funciona en tu perfil">Ganchos baseados no que já funciona no seu perfil</td></tr>
+    <tr><td><b data-en="Topic choice" data-es="Elección de temas">Escolha de temas</b></td><td class="bad" data-en="Guesswork and trends that attract browsers" data-es="Corazonadas y tendencias que solo atraen curiosos">Achismo e trends que atraem só curiosos</td><td class="good" data-en="Based on pillars with the best engagement" data-es="Basada en los pilares con mejor interacción">Baseada nos pilares com melhor engajamento</td></tr>
+    <tr><td><b data-en="Scripting" data-es="Guiones">Roteiros</b></td><td class="bad" data-en="Hours on camera without knowing what to say" data-es="Horas frente a la cámara sin saber qué decir">Horas na frente da câmera sem saber o que falar</td><td class="good" data-en="10 scripts with hook, body and CTA" data-es="10 guiones con gancho, cuerpo y CTA">10 roteiros com gancho, corpo e CTA</td></tr>
+    <tr><td><b data-en="Account safety" data-es="Seguridad de la cuenta">Segurança da conta</b></td><td class="bad" data-en="Tools that ask for your login" data-es="Herramientas que piden tu usuario y contraseña">Ferramentas que pedem seu login</td><td class="good" data-en="No access to your account, public data only" data-es="Sin acceso a tu cuenta, solo datos públicos">Sem acesso à sua conta, só dados públicos</td></tr>
+  </tbody></table></div></section>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Funciona se o meu perfil ainda for pequeno? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sim. Basta que o perfil seja público e tenha pelo menos 10 a 15 Reels publicados para que o algoritmo de diagnóstico consiga cruzar os padrões de retenção e gerar os 10 roteiros personalizados para o seu nicho.</div>
-      </div>
+<section id="planos"><div class="head rv"><span class="badge" data-en="Pricing" data-es="Precios">Planos</span><h2 data-en="Start free, <span class='grad'>unlock when it makes sense</span>" data-es="Empieza gratis, <span class='grad'>desbloquea cuando tenga sentido</span>">Comece grátis, <span class="grad">desbloqueie quando fizer sentido</span></h2></div>
+  <div class="grid3">
+    <div class="card price rv"><h3 data-en="Free preview" data-es="Vista previa gratis">Prévia grátis</h3><div class="amt"><span data-en="US$ 0" data-es="US$ 0">R$ 0</span></div>
+      <ul><li data-en="Dashboard with your charts" data-es="Panel con tus gráficos">Painel com seus gráficos</li><li data-en="Blind spots identified" data-es="Puntos ciegos identificados">Pontos cegos identificados</li><li data-en="Action plan and scripts locked" data-es="Plan de acción y guiones bloqueados">Plano de ação e roteiros bloqueados</li></ul><a href="#solicitar" class="btn ghost" data-plan="free" data-en="Request preview" data-es="Pedir vista previa">Pedir prévia</a></div>
+    <div class="card price hot rv"><span class="tag" data-en="Complete" data-es="Completo">Completo</span><h3 data-en="Full audit" data-es="Auditoría completa">Auditoria completa</h3><div class="amt"><span data-en="US$ 67" data-es="US$ 67">R$ 297</span> <small data-en="one-time" data-es="pago único">pagamento único</small></div>
+      <ul><li data-en="Everything in the preview" data-es="Todo lo de la vista previa">Tudo da prévia</li><li data-en="15-day action plan" data-es="Plan de acción de 15 días">Plano de ação de 15 dias</li><li data-en="10 scripts with hook, body and CTA" data-es="10 guiones con gancho, cuerpo y CTA">10 roteiros com gancho, corpo e CTA</li><li data-en="Private link, mobile friendly" data-es="Enlace privado, optimizado para móvil">Link privado, otimizado para celular</li></ul><a href="#solicitar" class="btn" data-plan="single" data-en="Get the full audit" data-es="Quiero la auditoría completa">Quero a auditoria completa</a></div>
+    <div class="card price rv"><h3 data-en="For agencies" data-es="Para agencias">Para agências</h3><div class="amt"><span data-en="US$ 147" data-es="US$ 147">R$ 497</span><small data-en="/month" data-es="/mes">/mês</small></div>
+      <ul><li data-en="Up to 10 audits per month" data-es="Hasta 10 auditorías por mes">Até 10 auditorias por mês</li><li data-en="White-label: no DataLab branding" data-es="Marca blanca: sin la marca DataLab">White-label: sem a marca DataLab</li><li data-en="Present it as your agency's intelligence" data-es="Preséntalo como inteligencia de tu agencia">Apresente como inteligência da sua agência</li></ul><a href="#solicitar" class="btn ghost" data-plan="agency" data-en="Talk to us" data-es="Hablemos">Falar com a gente</a></div>
+  </div></section>
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Como funciona o Pacote White-Label para Agências (R$ 497/mês)? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Agências de marketing e social medias recebem até 10 auditorias completas por mês sem a nossa marca no rodapé, prontas para serem apresentadas aos seus clientes como inteligência própria da sua agência.</div>
-      </div>
-    </section>
-  </main>
+<section id="faq"><div class="head rv"><span class="badge" data-en="FAQ" data-es="Dudas">Perguntas frequentes</span><h2 data-en="Questions before <span class='grad'>you start</span>" data-es="Preguntas antes de <span class='grad'>empezar</span>">Dúvidas antes de <span class="grad">começar</span></h2></div>
+  <div class="faq rv">
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="Do you need my Instagram password?" data-es="¿Necesitan mi contraseña de Instagram?">Vocês precisam da senha do meu Instagram?</span><i>+</i></button><div class="fa" data-en="No. We never ask for a password or admin access. We analyze only the public data of your latest Reels." data-es="No. Nunca pedimos contraseña ni acceso administrativo. Analizamos solo los datos públicos de tus últimos Reels.">Não. Nunca pedimos senha ou acesso administrativo. Analisamos apenas os dados públicos dos seus últimos Reels.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="How long does it take?" data-es="¿Cuánto tarda?">Em quanto tempo recebo?</span><i>+</i></button><div class="fa" data-en="Up to 24 hours after we confirm your request on WhatsApp. You get a private link that works on mobile and desktop." data-es="Hasta 24 horas después de confirmar tu pedido por WhatsApp. Recibes un enlace privado que abre en móvil y en computadora.">Em até 24 horas após confirmarmos seu pedido no WhatsApp. Você recebe um link privado que abre no celular e no computador.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="How do I pay?" data-es="¿Cómo se paga?">Como faço o pagamento?</span><i>+</i></button><div class="fa" data-en="We agree on it on WhatsApp: Pix in Brazil, PayPal or Wise internationally. The full report is released after payment is confirmed." data-es="Lo acordamos por WhatsApp: Pix en Brasil, PayPal o Wise desde el exterior. El informe completo se libera tras confirmar el pago.">Combinamos pelo WhatsApp: Pix no Brasil, PayPal ou Wise para o exterior. O relatório completo é liberado após a confirmação do pagamento.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="Does it work for small profiles?" data-es="¿Funciona con perfiles pequeños?">Funciona se meu perfil for pequeno?</span><i>+</i></button><div class="fa" data-en="Yes, as long as the profile is public and has at least 10 to 15 Reels published." data-es="Sí, siempre que el perfil sea público y tenga al menos 10 a 15 Reels publicados.">Sim, desde que o perfil seja público e tenha pelo menos 10 a 15 Reels publicados.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="How does the agency plan work?" data-es="¿Cómo funciona el plan para agencias?">Como funciona o plano para agências?</span><i>+</i></button><div class="fa" data-en="You get up to 10 full audits per month without our branding, ready to present to your clients." data-es="Recibes hasta 10 auditorías completas al mes sin nuestra marca, listas para presentar a tus clientes.">Você recebe até 10 auditorias completas por mês sem a nossa marca, prontas para apresentar aos seus clientes.</div></div>
+  </div></section>
 
-  <footer>
-    <strong>datalab.reels</strong> • Inteligência de Retenção e Conteúdo B2B • Instagram: @datalab.reels
-  </footer>
+<section style="padding-top:20px"><div class="final rv"><h2 data-en="Find out what is holding your Reels back" data-es="Descubre qué está frenando tus Reels">Descubra o que está segurando os seus Reels</h2><p class="lead" style="margin:0 auto 22px" data-en="Request your free preview and see your charts and blind spots first." data-es="Pide tu vista previa gratis y mira primero tus gráficos y puntos ciegos.">Peça sua prévia grátis e veja primeiro seus gráficos e pontos cegos.</p><a href="#solicitar" class="btn" data-en="Get my free preview →" data-es="Quiero mi vista previa gratis →">Quero minha prévia grátis →</a></div></section>
+</div>
+</main>
 
-  <script>
-    // Envio do Formulário Compatível com Navegador Interno do Instagram
-    document.getElementById('auditForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const user = document.getElementById('igUser').value.trim();
-      const plan = document.getElementById('igPlan').value;
-      const comp = document.getElementById('igComp').value.trim() || 'Não informado';
-      const text = `Olá! Preenchi o formulário no site datalab.reels e quero solicitar meu diagnóstico:\n\n• Perfil: ${user}\n• Plano: ${plan}\n• Concorrente: ${comp}`;
-      const base = "https:" + "//wa.me/5564993018442?text=";
-      window.location.href = base + encodeURIComponent(text);
-    });
+<footer><div class="wrap"><b>DataLab Reels</b> • <span data-en="Reels audit for businesses and agencies" data-es="Auditoría de Reels para empresas y agencias">Auditoria de Reels para empresas e agências</span><br>Instagram: <a href="https://instagram.com/datalab.reels" rel="noopener">@datalab.reels</a> • <span data-en="Analysis based on public data only." data-es="Análisis basado solo en datos públicos.">Análise baseada apenas em dados públicos.</span><br><span data-en="Not affiliated with Instagram or Meta." data-es="Sin afiliación con Instagram ni Meta.">Sem afiliação com o Instagram ou a Meta.</span></div></footer>
 
-    // Simulador Interativo de Nichos
-    const simData = {
-      clinica: {
-        title: '@clinica.estetica_exemplo',
-        sub: '15 Reels analisados • Benchmark aplicado contra líder regional',
-        score: '76 / 100',
-        p1: ['Bastidores & Procedimento Real', '62%'],
-        p2: ['Quebra de Objeção & Preço', '26%'],
-        p3: ['Vídeos Institucionais Genéricos', '12%'],
-        alert: '<strong>⚠️ Gargalo Crítico Detectado:</strong> 60% dos vídeos começam com "Olá pessoal, tudo bem?", causando perda de 71% da audiência antes dos 3 segundos.',
-        script: '<strong>[00s - 03s • Gancho Visual]:</strong> Mostre o antes/depois em close com texto na tela: <em>"3 erros que fazem sua lente de contato manchar em menos de 1 ano"</em>.<br><br><strong>[03s - 22s • Retenção]:</strong> Explique o erro #1 de higienização usando linguagem simples sem termos técnicos.<br><br><strong>[22s - 30s • CTA de Venda]:</strong> <em>"Quer avaliar seu caso sem compromisso? Clique no link da bio e agende sua avaliação."</em>'
-      },
-      adv: {
-        title: '@escritorio.advocacia_exemplo',
-        sub: '15 Reels analisados • Foco em captação de causas de alto valor',
-        score: '71 / 100',
-        p1: ['Direitos na Prática (Casos Reais)', '58%'],
-        p2: ['Alertas de Prazos & Indenizações', '31%'],
-        p3: ['Leitura de Leis & Artigos', '11%'],
-        alert: '<strong>⚠️ Gargalo Crítico Detectado:</strong> Uso excessivo de juridiquês nos primeiros 5 segundos faz o cliente fechar o vídeo antes de entender que tem direito.',
-        script: '<strong>[00s - 03s • Gancho Direto]:</strong> Olhe para a câmera com documento na mão: <em>"Foi demitido sem receber horas extras? Olhe esse detalhe no seu holerite"</em>.<br><br><strong>[03s - 25s • Retenção]:</strong> Mostre na prática como calcular o valor perdido em 15 segundos.<br><br><strong>[25s - 32s • CTA de Venda]:</strong> <em>"Envie a palavra DIREITO no direct ou clique no link da bio para falar com nossa equipe."</em>'
-      }
-    };
+<div id="sb"><a href="#solicitar" class="btn" data-en="Get my free preview →" data-es="Quiero mi vista previa gratis →">Quero minha prévia grátis →</a></div>
 
-    function setSim(key, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const d = simData[key];
-      document.getElementById('simTitle').textContent = d.title;
-      document.getElementById('simSub').textContent = d.sub;
-      document.getElementById('simScore').textContent = d.score;
-      document.getElementById('p1Name').textContent = d.p1[0]; document.getElementById('p1Val').textContent = d.p1[1]; document.getElementById('p1Bar').style.width = d.p1[1];
-      document.getElementById('p2Name').textContent = d.p2[0]; document.getElementById('p2Val').textContent = d.p2[1]; document.getElementById('p2Bar').style.width = d.p2[1];
-      document.getElementById('p3Name').textContent = d.p3[0]; document.getElementById('p3Val').textContent = d.p3[1]; document.getElementById('p3Bar').style.width = d.p3[1];
-      document.getElementById('simAlert').innerHTML = d.alert;
-      document.getElementById('simScript').innerHTML = d.script;
-    }
-
-    // FAQ Acordeão
-    function toggleFaq(btn) {
-      btn.parentElement.classList.toggle('open');
-    }
-  </script>
-      <script>
-    const dictEN = {
-      "Como Funciona": "How It Works",
-      "Simulador Real": "Live Demo",
-      "Antes vs. Depois": "Before vs. After",
-      "Dúvidas": "FAQ",
-      "Solicitar Raio-X": "Request Audit",
-      "Inteligência de Retenção &amp; Conversão B2B": "B2B Retention &amp; Conversion Intelligence",
-      "Pare de postar no escuro e": "Stop posting in the dark and",
-      "destrave as vendas": "unlock sales",
-      "dos seus Reels.": "from your Reels.",
-      "Auditamos os últimos 15 vídeos do seu perfil, cruzamos métricas com seu principal concorrente e entregamos um painel interativo + 10 roteiros prontos para atrair clientes reais.": "We audit your last 15 videos, benchmark your top competitor, and deliver an interactive dashboard + 10 ready-to-shoot scripts to attract real clients.",
-      "Mapeados em profundidade": "Mapped in full depth",
-      "10 Roteiros": "10 Scripts",
-      "Prontos com gancho e CTA": "Ready with hooks & CTAs",
-      "Zero Senha": "Zero Password",
-      "100% via dados públicos": "100% public data analysis",
-      "Gerar Diagnóstico Completo": "Generate Full Audit",
-      "Selecione seu plano e informe seu perfil para iniciarmos a análise em até 24h.": "Select your plan and enter your handle to start within 24h.",
-      "Seu @ do Instagram *": "Your Instagram @ *",
-      "Modalidade *": "Audit Plan *",
-      "Individual: Raio-X 15 Reels + 10 Roteiros (R$ 297)": "Single: 15 Reels Audit + 10 Scripts (US$ 97)",
-      "Agências: Pacote White-Label 10 Clientes/mês (R$ 497/mês)": "Agencies: White-Label 10 Clients/mo (US$ 147/mo)",
-      "1 Concorrente Direto (Opcional)": "1 Direct Competitor (Optional)",
-      "Solicitar Meu Painel no WhatsApp →": "Request My Dashboard on WhatsApp →",
-      "Não pedimos login nem senha do seu Instagram.": "We never ask for your Instagram login or password.",
-      "Etapa 01 • Leitura de Dados": "Step 01 • Data Mining",
-      "Raio-X dos Últimos 15 Vídeos": "Last 15 Videos X-Ray",
-      "Coletamos performance, duração e engajamento real do seu perfil e comparamos com o líder do seu nicho.": "We extract performance, duration, and real engagement from your profile and compare them with your niche leader.",
-      "Etapa 02 • Retenção": "Step 02 • Retention",
-      "Mapeamento de Pontos Cegos": "Blind Spot Mapping",
-      "Identificamos exatamente por que o público desliza nos primeiros 3 segundos e quais temas trazem compradores.": "We pinpoint why viewers swipe away in the first 3 seconds and which topics bring real buyers.",
-      "Etapa 03 • Execução": "Step 03 • Execution",
-      "Painel Online + 10 Roteiros": "Live Dashboard + 10 Scripts",
-      "Você recebe um link exclusivo com gráficos interativos, plano de 15 dias e 10 roteiros prontos para gravar.": "You receive a private link with interactive charts, a 15-day action plan, and 10 ready-to-shoot scripts.",
-      "Demonstração Interativa": "Interactive Demo",
-      "Veja o que você recebe": "See what you get",
-      "por dentro do painel": "inside your dashboard",
-      "Clínica Odontológica / Estética": "Dental & Aesthetic Clinic",
-      "Escritório de Advocacia": "Law Firm",
-      "15 Reels analisados • Benchmark aplicado": "15 Reels analyzed • Benchmark applied",
-      "Retenção por Pilar": "Retention by Pillar",
-      "Bastidores &amp; Procedimento": "Behind the Scenes &amp; Procedure",
-      "Quebra de Objeção": "Objection Handling",
-      "Institucional Genérico": "Generic Institutional",
-      "Gargalo Crítico:": "Critical Bottleneck:",
-      "60% dos vídeos começam com \"Olá pessoal\", perdendo 71% da audiência antes dos 3 segundos.": "60% of videos start with \"Hi everyone\", losing 71% of viewers before 3 seconds.",
-      "Amostra de Roteiro Corrigido": "Corrected Script Sample",
-      "Impacto Operacional": "Operational Impact",
-      "Postar no Escuro vs.": "Posting Blindly vs.",
-      "Protocolo DataLab": "DataLab Protocol",
-      "Critério de Performance": "Performance Criteria",
-      "Produção Sem Dados (Amador)": "Posting Without Data (Amateur)",
-      "Com Auditoria datalab.reels": "With datalab.reels Audit",
-      "Primeiros 3 Segundos": "First 3 Seconds",
-      "Saudações lentas e introduções que derrubam a entrega": "Slow greetings and intros that kill reach",
-      "Ganchos visuais e verbais validados para reter compradores": "Validated visual and verbal hooks to retain buyers",
-      "Escolha de Temas": "Topic Selection",
-      "Baseada em \"achismo\" ou trends que só trazem curiosos": "Based on guesswork or trends that bring browsers",
-      "Baseada nos pilares que realmente geraram engajamento e leads": "Based on pillars that actually generate leads",
-      "Roteirização": "Scripting",
-      "Horas travado na frente da câmera sem saber o que falar": "Hours stuck on camera not knowing what to say",
-      "10 roteiros completos entregues linha por linha em até 24h": "10 full scripts delivered line by line within 24h",
-      "Segurança da Conta": "Account Safety",
-      "Ferramentas invasivas que pedem login e arriscam bloqueio": "Invasive tools asking for login and risking bans",
-      "100% seguro: análise feita exclusivamente sobre métricas públicas": "100% safe: analysis done strictly on public metrics",
-      "Perguntas Frequentes": "FAQ",
-      "Tire suas dúvidas antes de": "Common questions before",
-      "solicitar": "ordering",
-      "Vocês precisam da senha do meu Instagram?": "Do you need my Instagram password?",
-      "Em quanto tempo recebo meu painel e os 10 roteiros?": "How fast do I receive my dashboard and 10 scripts?",
-      "Funciona se o meu perfil ainda for pequeno?": "Does it work for smaller accounts?",
-      "R$ 297": "US$ 97",
-      "R$ 497/mês": "US$ 147/mo"
-    };
-
-    const dictES = {
-      "Como Funciona": "Cómo Funciona",
-      "Simulador Real": "Simulador Real",
-      "Antes vs. Depois": "Antes vs. Después",
-      "Dúvidas": "Dudas",
-      "Solicitar Raio-X": "Solicitar Auditoría",
-      "Inteligência de Retenção &amp; Conversão B2B": "Inteligencia de Retención y Conversión B2B",
-      "Pare de postar no escuro e": "Deja de publicar a ciegas y",
-      "destrave as vendas": "desbloquea ventas",
-      "dos seus Reels.": "con tus Reels.",
-      "Auditamos os últimos 15 vídeos do seu perfil, cruzamos métricas com seu principal concorrente e entregamos um painel interativo + 10 roteiros prontos para atrair clientes reais.": "Auditamos tus últimos 15 videos, comparamos con tu competidor y entregamos un panel interactivo + 10 guiones listos para atraer clientes reales.",
-      "Mapeados em profundidade": "Analizados en profundidad",
-      "10 Roteiros": "10 Guiones",
-      "Prontos com gancho e CTA": "Listos con gancho y CTA",
-      "Zero Senha": "Cero Contraseña",
-      "100% via dados públicos": "100% vía datos públicos",
-      "Gerar Diagnóstico Completo": "Generar Diagnóstico Completo",
-      "Selecione seu plano e informe seu perfil para iniciarmos a análise em até 24h.": "Selecciona tu plan e ingresa tu perfil para iniciar en 24h.",
-      "Seu @ do Instagram *": "Tu @ de Instagram *",
-      "Modalidade *": "Modalidad *",
-      "Individual: Raio-X 15 Reels + 10 Roteiros (R$ 297)": "Individual: Auditoría 15 Reels + 10 Guiones (US$ 97)",
-      "Agências: Pacote White-Label 10 Clientes/mês (R$ 497/mês)": "Agencias: Paquete White-Label 10 Clientes/mes (US$ 147/mes)",
-      "1 Concorrente Direto (Opcional)": "1 Competidor Directo (Opcional)",
-      "Solicitar Meu Painel no WhatsApp →": "Solicitar Mi Panel por WhatsApp →",
-      "Não pedimos login nem senha do seu Instagram.": "Nunca pedimos usuario ni contraseña de tu Instagram.",
-      "Etapa 01 • Leitura de Dados": "Paso 01 • Lectura de Datos",
-      "Raio-X dos Últimos 15 Vídeos": "Rayos-X de los Últimos 15 Videos",
-      "Coletamos performance, duração e engajamento real do seu perfil e comparamos com o líder do seu nicho.": "Recopilamos rendimiento, duración y retención real de tu perfil y los comparamos con el líder de tu nicho.",
-      "Etapa 02 • Retenção": "Paso 02 • Retención",
-      "Mapeamento de Pontos Cegos": "Mapeo de Puntos Cegos",
-      "Identificamos exatamente por que o público desliza nos primeiros 3 segundos e quais temas trazem compradores.": "Identificamos por qué la audiencia desliza en los primeros 3 segundos y qué temas atraen compradores.",
-      "Etapa 03 • Execução": "Paso 03 • Ejecución",
-      "Painel Online + 10 Roteiros": "Panel Online + 10 Guiones",
-      "Você recebe um link exclusivo com gráficos interativos, plano de 15 dias e 10 roteiros prontos para gravar.": "Recibes un enlace exclusivo con gráficos interactivos, plan de 15 días y 10 guiones listos para grabar.",
-      "Demonstração Interativa": "Demostración Interactiva",
-      "Veja o que você recebe": "Mira lo que recibes",
-      "por dentro do painel": "por dentro del panel",
-      "Clínica Odontológica / Estética": "Clínica Dental / Estética",
-      "Escritório de Advocacia": "Despacho de Abogados",
-      "15 Reels analisados • Benchmark aplicado": "15 Reels analizados • Benchmark aplicado",
-      "Retenção por Pilar": "Retención por Pilar",
-      "Bastidores &amp; Procedimento": "Detrás de Cámaras y Procedimiento",
-      "Quebra de Objeção": "Manejo de Objeciones",
-      "Institucional Genérico": "Institucional Genérico",
-      "Gargalo Crítico:": "Cuello de Botella:",
-      "60% dos vídeos começam com \"Olá pessoal\", perdendo 71% da audiência antes dos 3 segundos.": "60% de los videos empiezan con \"Hola a todos\", perdiendo 71% de audiencia antes de 3 segundos.",
-      "Amostra de Roteiro Corrigido": "Muestra de Guion Corregido",
-      "Impacto Operacional": "Impacto Operacional",
-      "Postar no Escuro vs.": "Publicar a Ciegas vs.",
-      "Protocolo DataLab": "Protocolo DataLab",
-      "Critério de Performance": "Criterio de Rendimiento",
-      "Produção Sem Dados (Amador)": "Producción Sin Datos (Amateur)",
-      "Com Auditoria datalab.reels": "Con Auditoría datalab.reels",
-      "Primeiros 3 Segundos": "Primeros 3 Segundos",
-"Saudações lentas e introduções que derrubam a entrega": "Saludos lentos e intros que derrumban el alcance",
-"Ganchos visuais e verbais validados para reter compradores": "Ganchos visuales y verbales validados para retener",
-"Escolha de Temas": "Elección de Temas",
-"Baseada em \"achismo\" ou trends que só trazem curiosos": "Basada en suposiciones o trends que traen curiosos",
-"Baseada nos pilares que realmente geraram engajamento e leads": "Basada en pilares que realmente generan clientes",
-"Roteirização": "Guiones",
-"Horas travado na frente da câmera sem saber o que falar": "Horas frente a la cámara sin saber qué decir",
-"10 roteiros completos entregues linha por linha em até 24h": "10 guiones completos línea por línea en 24h",
-"Segurança da Conta": "Seguridad de Cuenta",
-"Ferramentas invasivas que pedem login e arriscam bloqueio": "Herramientas que piden clave y arriesgan bloqueo",
-"100% seguro: análise feita exclusivamente sobre métricas públicas": "100% seguro: análisis sobre métricas públicas",
-"Perguntas Frequentes": "Preguntas Frecuentes",
-"Tire suas dúvidas antes de": "Resuelve tus dudas antes de",
-"solicitar": "solicitar",
-"Vocês precisam da senha do meu Instagram?": "¿Necesitan la contraseña de mi Instagram?",
-"Em quanto tempo recebo meu painel e os 10 roteiros?": "¿En cuánto tiempo recibo mi panel y los 10 guiones?",
-"Funciona se o meu perfil ainda for pequeno?": "¿Funciona si mi perfil aún es pequeño?",
-"R$ 297": "US$ 97",
-"R$ 497/mês": "US$ 147/mes"
-};
-// Salva os textos originais em PT na primeira vez para trocar livremente sem recarregar a página
-const originalNodes = [];
-function captureOriginalTexts() {
-  if (originalNodes.length > 0) return;
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-  let node;
-  while ((node = walker.nextNode())) {
-    if (node.parentElement && !['SCRIPT', 'STYLE'].includes(node.parentElement.tagName)) {
-      if (node.nodeValue.trim().length > 0) {
-        originalNodes.push({ node, original: node.nodeValue });
-      }
-    }
-  }
+<script>
+var lang='pt';
+var TTL={pt:['DataLab Reels — Auditoria de Reels com 10 roteiros prontos','Auditoria dos seus últimos 15 Reels com painel interativo, pontos cegos e 10 roteiros prontos para gravar. Só dados públicos, sem senha. Entrega em até 24h.'],en:['DataLab Reels — Reels audit with 10 ready-to-shoot scripts','Audit of your last 15 Reels with an interactive dashboard, blind spots and 10 scripts ready to shoot. Public data only, no password. Delivered within 24h.'],es:['DataLab Reels — Auditoría de Reels con 10 guiones listos','Auditoría de tus últimos 15 Reels con panel interactivo, puntos ciegos y 10 guiones listos para grabar. Solo datos públicos, sin contraseña. Entrega en 24 h.']};
+function setLang(l){
+  lang=l;document.documentElement.lang={pt:'pt-BR',en:'en',es:'es'}[l];
+  document.querySelectorAll('[data-en]').forEach(function(e){if(!e.dataset.pt)e.dataset.pt=e.innerHTML;e.innerHTML=l==='pt'?e.dataset.pt:(e.dataset[l]||e.dataset.en)});
+  document.querySelectorAll('[data-en-ph]').forEach(function(e){if(!e.dataset.ph)e.dataset.ph=e.placeholder;e.placeholder=l==='pt'?e.dataset.ph:(e.dataset[l+'Ph']||e.dataset.enPh)});
+  document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===l)});
+  document.title=TTL[l][0];var m=document.querySelector('meta[name=description]');if(m)m.content=TTL[l][1];
+  try{localStorage.setItem('dl_lang',l)}catch(e){}
 }
+(function(){var s=null;try{s=localStorage.getItem('dl_lang')}catch(e){}
+  var n=(navigator.language||'pt').toLowerCase();
+  var l=(s&&TTL[s])?s:(n.indexOf('pt')===0?'pt':n.indexOf('es')===0?'es':'en');if(l!=='pt')setLang(l)})();
 
-function setLang(l) {
-  captureOriginalTexts();
-  localStorage.setItem('dl_lang', l);
+var M={pt:{free:'Prévia grátis',single:'Auditoria completa (R$ 297)',agency:'Plano Agências (R$ 497/mês)'},en:{free:'Free preview',single:'Full audit (US$ 67)',agency:'Agency plan (US$ 147/mo)'},es:{free:'Vista previa gratis',single:'Auditoría completa (US$ 67)',agency:'Plan Agencias (US$ 147/mes)'}};
+var ERR={pt:'Digite um @ válido do Instagram (letras, números, ponto ou _).',en:'Enter a valid Instagram @ (letters, numbers, dot or _).',es:'Ingresa un @ válido de Instagram (letras, números, punto o _).'};
+var NA={pt:'Não informado',en:'Not provided',es:'No indicado'};
+var HANDLE=/^[A-Za-z0-9._]{1,30}$/;
+function clean(v){return v.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/[\/?#].*$/,'').replace(/^@+/,'')}
+var fu=document.getElementById('u');
+fu.addEventListener('input',function(){fu.setCustomValidity('')});
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var u=clean(fu.value);
+  if(!HANDLE.test(u)){fu.setCustomValidity(ERR[lang]);fu.reportValidity();return}
+  var c=clean(document.getElementById('c').value);c=HANDLE.test(c)?'@'+c:NA[lang];
+  var p=M[lang][document.getElementById('p').value];
+  var T={pt:'Olá! Vim pelo site DataLab Reels e quero:\n• '+p+'\n• Perfil: @'+u+'\n• Concorrente: '+c,
+    en:'Hi! I came from the DataLab Reels site and want:\n• '+p+'\n• Profile: @'+u+'\n• Competitor: '+c,
+    es:'¡Hola! Vengo del sitio DataLab Reels y quiero:\n• '+p+'\n• Perfil: @'+u+'\n• Competidor: '+c};
+  window.location.href='https:'+'//wa.me/5564993018442?text='+encodeURIComponent(T[lang]);
+});
+document.querySelectorAll('[data-plan]').forEach(function(a){a.addEventListener('click',function(){document.getElementById('p').value=a.dataset.plan})});
+document.querySelectorAll('.fq').forEach(function(b){b.addEventListener('click',function(){var o=b.parentElement.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
 
-  // Atualiza estado visual dos botões PT / EN / ES
-  document.querySelectorAll('header button').forEach(btn => {
-    const txt = btn.textContent.trim().toLowerCase();
-    if (['pt', 'en', 'es'].includes(txt)) {
-      btn.classList.toggle('active', txt === l);
-    }
-  });
-
-  // Restaura textos originais em PT primeiro
-  originalNodes.forEach(item => {
-    item.node.nodeValue = item.original;
-  });
-
-  // Aplica tradução EN ou ES se não for PT
-  if (l !== 'pt') {
-    const map = l === 'en' ? dictEN : dictES;
-    if (map) {
-      originalNodes.forEach(item => {
-        let text = item.node.nodeValue;
-        for (const [pt, tr] of Object.entries(map)) {
-          if (text.includes(pt)) {
-            text = text.split(pt).join(tr);
-          }
-        }
-        item.node.nodeValue = text;
-      });
-    }
-  }
-
-  // Atualiza placeholders dos inputs
-  const userInp = document.getElementById('igUser');
-  const compInp = document.getElementById('igComp');
-  if (userInp) {
-    userInp.placeholder = l === 'en' ? 'Ex: @yourclinic' : l === 'es' ? 'Ej: @tuclinica' : 'Ex: @suaclinica';
-  }
-  if (compInp) {
-    compInp.placeholder = l === 'en' ? 'Ex: @competitor' : l === 'es' ? 'Ej: @competidor' : 'Ex: @concorrente';
-  }
-}
-
-(function autoDetectLang() {
-const saved = localStorage.getItem('dl_lang');
-if (saved) { if (saved !== 'pt') setLang(saved); return; }
-const nav = (navigator.language || '').toLowerCase();
-if (nav.startsWith('es')) setLang('es');
-else if (nav.startsWith('en')) setLang('en');
-})();
-
-  </script>
-
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+  var fo=new IntersectionObserver(function(en){document.getElementById('sb').classList.toggle('on',!en[0].isIntersecting&&window.scrollY>300)},{threshold:0});
+  fo.observe(document.getElementById('solicitar'));
+}else{document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')})}
+</script>
 </body>
 </html>
