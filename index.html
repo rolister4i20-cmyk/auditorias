@@ -1,201 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DataLab Reels — Automated Instagram Reels Audit & 10 Ready-to-Film Scripts</title>
-  <style>
-    :root { --bg:#090d16; --card:#111827; --border:#1f2937; --text:#f3f4f6; --muted:#9ca3af; --accent:#6366f1; --accent2:#10b981; }
-    * { box-sizing:border-box; margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
-    body { background:var(--bg); color:var(--text); line-height:1.6; }
-    .container { max-width:1100px; margin:0 auto; padding:0 20px; }
-    header { border-bottom:1px solid var(--border); padding:18px 0; position:sticky; top:0; background:rgba(9,13,22,0.92); backdrop-filter:blur(10px); z-index:50; }
-    .nav { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
-    .logo { font-weight:800; font-size:1.25rem; color:#fff; text-decoration:none; }
-    .logo span { color:var(--accent); }
-    .lang-btns button { background:var(--card); border:1px solid var(--border); color:var(--muted); padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem; font-weight:600; }
-    .lang-btns button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-    .btn { display:inline-block; background:var(--accent); color:#fff; padding:13px 24px; border-radius:8px; font-weight:700; text-decoration:none; border:none; cursor:pointer; transition:0.2s; font-size:0.95rem; text-align:center; }
-    .btn-green { background:var(--accent2); color:#052e16; }
-    .btn-outline { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .hero { padding:72px 0 56px; text-align:center; }
-    .badge { display:inline-block; background:rgba(99,102,241,0.15); color:#a5b4fc; border:1px solid rgba(99,102,241,0.3); padding:6px 14px; border-radius:99px; font-size:0.82rem; font-weight:600; margin-bottom:20px; }
-    h1 { font-size:clamp(2rem,4.5vw,3.3rem); line-height:1.15; font-weight:800; max-width:850px; margin:0 auto 20px; }
-    .hero p { color:var(--muted); font-size:1.12rem; max-width:680px; margin:0 auto 32px; }
-    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; max-width:800px; margin:44px auto 0; }
-    .stat-box { background:var(--card); border:1px solid var(--border); padding:18px; border-radius:12px; }
-    .stat-box strong { display:block; font-size:1.5rem; color:#fff; }
-    .stat-box span { font-size:0.85rem; color:var(--muted); }
-    section { padding:64px 0; border-top:1px solid var(--border); }
-    h2 { font-size:2rem; text-align:center; margin-bottom:12px; }
-    .sub { text-align:center; color:var(--muted); max-width:620px; margin:0 auto 40px; }
-    .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
-    .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px; display:flex; flex-direction:column; justify-content:space-between; }
-    .card.featured { border-color:var(--accent); box-shadow:0 0 30px rgba(99,102,241,0.12); }
-    .step-tag { color:var(--accent); font-size:0.8rem; font-weight:700; text-transform:uppercase; margin-bottom:8px; display:block; }
-    .price { font-size:2.2rem; font-weight:800; color:#fff; margin:16px 0; }
-    .price small { font-size:0.9rem; color:var(--muted); font-weight:400; }
-    ul { list-style:none; margin:18px 0 26px; }
-    ul li { padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--muted); }
-    ul li::before { content:"✓ "; color:var(--accent2); font-weight:bold; }
-    .preview-box { max-width:520px; margin:0 auto; background:var(--card); border:1px solid var(--border); padding:32px; border-radius:16px; }
-    .field { margin-bottom:16px; text-align:left; }
-    .field label { display:block; font-size:0.85rem; color:var(--muted); margin-bottom:6px; font-weight:600; }
-    .field input { width:100%; padding:12px 14px; border-radius:8px; border:1px solid var(--border); background:#090d16; color:#fff; font-size:1rem; }
-    .sample-box { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px; max-width:820px; margin:0 auto; }
-    .blindspot { background:rgba(245,158,11,0.1); border-left:4px solid #f59e0b; padding:14px; border-radius:6px; color:#fcd34d; margin:18px 0; font-size:0.92rem; }
-    footer { border-top:1px solid var(--border); padding:36px 0; text-align:center; color:var(--muted); font-size:0.88rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#030712">
+<meta name="google-site-verification" content="B1aiPkczJDYxuYNaJafGnjSrefop0W1mfmVZq6FVqw">
+<title>DataLab Reels — Reels audit with 10 ready-to-shoot scripts</title>
+<meta name="description" content="Audit of your last 15 Reels with an interactive dashboard, blind spots and 10 scripts ready to shoot. Public data only, no password. Delivered in 5 minutes.">
+<meta property="og:title" content="DataLab Reels — find out what is blocking sales on your Reels">
+<meta property="og:description" content="Interactive dashboard + 15-day plan + 10 ready-to-shoot scripts. No password, public data only.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://datalab-reels.pages.dev/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://datalab-reels.pages.dev/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071024'/%3E%3Crect x='14' y='16' width='36' height='7' rx='3.5' fill='%2310b981'/%3E%3Crect x='14' y='28.5' width='36' height='7' rx='3.5' fill='%2338bdf8'/%3E%3Crect x='14' y='41' width='36' height='7' rx='3.5' fill='%2364748b'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23071024'/%3E%3Cpath d='M29 26l10 6-10 6z' fill='%2310b981'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--bg:#030712;--card:rgba(15,23,42,.8);--solid:#0f172a;--bd:rgba(56,189,248,.22);--bd2:rgba(255,255,255,.08);--em:#10b981;--em2:#059669;--sky:#38bdf8;--rose:#f43f5e;--tx:#f8fafc;--mu:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;overflow-x:hidden;padding-bottom:70px}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 400px at 10% -5%,rgba(16,185,129,.22),transparent),radial-gradient(600px 450px at 95% 105%,rgba(56,189,248,.2),transparent),linear-gradient(rgba(16,185,129,.05) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(56,189,248,.05) 1px,transparent 1px) 0 0/48px 48px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:72px 0;scroll-margin-top:70px}
+.grad{background:linear-gradient(90deg,var(--em),var(--sky));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.badge{display:inline-block;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:var(--em);background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);padding:6px 14px;border-radius:99px;margin-bottom:14px}
+h1{font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.1;font-weight:900;letter-spacing:-1px;margin-bottom:16px}
+h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;line-height:1.2;margin-bottom:10px}
+.lead{color:var(--mu);font-size:1.07rem;max-width:580px}
+.head{text-align:center;max-width:720px;margin:0 auto 40px}
+.head p{color:var(--mu)}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(3,7,18,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd2)}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:900;font-size:1.25rem;letter-spacing:-.5px}
+.nav-l{display:flex;gap:22px}.nav-l a{color:var(--mu);text-decoration:none;font-size:.88rem;font-weight:600}.nav-l a:hover{color:#fff}
+.nav-r{display:flex;gap:8px;align-items:center}
+.lang{display:flex;border:1px solid #334155;border-radius:8px;overflow:hidden}
+.lang button{background:var(--solid);border:0;color:var(--mu);padding:6px 10px;font-size:.74rem;font-weight:800;cursor:pointer}
+.lang button[aria-pressed=true]{background:rgba(16,185,129,.2);color:#fff}
+.btn{display:inline-block;text-align:center;text-decoration:none;border:0;cursor:pointer;font-weight:800;border-radius:12px;padding:13px 22px;font-size:.95rem;background:linear-gradient(90deg,var(--em),var(--sky));color:#020617;box-shadow:0 8px 26px rgba(16,185,129,.35);transition:transform .2s,filter .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.sm{padding:9px 16px;font-size:.84rem;border-radius:10px}
+.btn.ghost{background:transparent;color:#fff;border:1px solid #475569;box-shadow:none}
+@media(max-width:820px){.nav-l{display:none}}
+@media(max-width:480px){.nav-r .btn{display:none}}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:48px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--bd2);border-radius:14px;padding:12px 14px}
+.stat b{display:block;font-size:1.2rem;color:var(--sky)}.stat span{font-size:.76rem;color:var(--mu)}
+.form{background:var(--card);backdrop-filter:blur(18px);border:1px solid var(--bd);border-radius:22px;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,.7),0 0 35px rgba(56,189,248,.12)}
+.form h3{font-size:1.3rem;margin-bottom:4px}.form>p{font-size:.85rem;color:var(--mu);margin-bottom:18px}
+.field{margin-bottom:13px}.field label{display:block;font-size:.8rem;font-weight:600;color:#cbd5e1;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 14px;border-radius:10px;background:#020617;border:1px solid #334155;color:#fff;font-size:1rem}
+.field input:focus,.field select:focus{border-color:var(--em);outline:0;box-shadow:0 0 0 3px rgba(16,185,129,.22)}
+.form .btn{width:100%;margin-top:6px;padding:15px}
+.note{text-align:center;font-size:.76rem;color:var(--mu);margin-top:11px}
+/* steps */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--bd2);border-radius:18px;padding:26px;transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--em);transform:translateY(-4px)}
+.card small{color:var(--em);font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:.74rem}
+.card h3{font-size:1.12rem;margin:9px 0 7px}.card p{color:var(--mu);font-size:.9rem}
+/* demo */
+.demo{background:var(--solid);border:1px solid var(--bd);border-radius:22px;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,.6)}
+.demo-top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--bd2);padding-bottom:20px;margin-bottom:22px}
+.ring{--v:76;width:88px;height:88px;border-radius:50%;background:conic-gradient(var(--em) calc(var(--v)*1%),#1e293b 0);display:grid;place-items:center}
+.ring div{width:68px;height:68px;border-radius:50%;background:var(--solid);display:grid;place-items:center;font-size:1.3rem;font-weight:900}
+.ill{font-size:.72rem;color:#fbbf24;border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.08);padding:4px 10px;border-radius:99px;font-weight:700}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:820px){.dg{grid-template-columns:1fr}}
+.panel{background:#020617;border:1px solid #1e293b;border-radius:16px;padding:20px}
+.panel h4{font-size:.85rem;color:var(--sky);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.bar{margin-bottom:13px}.bar div:first-child{display:flex;justify-content:space-between;font-size:.82rem;color:#cbd5e1;margin-bottom:5px}
+.trk{height:8px;background:#1e293b;border-radius:99px;overflow:hidden}.trk i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--em),var(--sky))}
+.blind{background:rgba(244,63,94,.1);border-left:3px solid var(--rose);padding:12px 14px;border-radius:8px;font-size:.85rem;color:#fecdd3}
+.scr{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.35);border-left:4px solid var(--sky);padding:14px;border-radius:10px;font-size:.85rem;color:#e0f2fe}
+.lock{position:relative;margin-top:12px;filter:blur(4px);user-select:none;pointer-events:none;font-size:.85rem;color:#cbd5e1}
+.lockwrap{position:relative}.lockwrap span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:.85rem;z-index:2}
+/* compare */
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--bd2);border-radius:18px;overflow:hidden;min-width:560px}
+th,td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--bd2);font-size:.9rem}
+th{background:#020617;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--mu)}
+.bad{color:#fda4af}.good{color:#6ee7b7;font-weight:600}
+/* pricing */
+.price{display:flex;flex-direction:column}
+.price.hot{border-color:var(--em);box-shadow:0 0 40px rgba(16,185,129,.18)}
+.tag{align-self:flex-start;background:var(--em);color:#020617;font-size:.7rem;font-weight:900;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-bottom:10px}
+.amt{font-size:2.3rem;font-weight:900;margin:6px 0 2px}.amt small{font-size:.9rem;color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0}
+.price ul{list-style:none;margin:16px 0 22px;flex:1}.price li{font-size:.9rem;color:#cbd5e1;padding:6px 0 6px 24px;position:relative}
+.price li:before{content:"✓";position:absolute;left:0;color:var(--em);font-weight:900}
+/* faq */
+.faq{max-width:820px;margin:0 auto}
+.fi{background:var(--card);border:1px solid var(--bd2);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.fq{width:100%;background:none;border:0;color:#fff;text-align:left;padding:18px 22px;font-size:.98rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;gap:12px}
+.fq i{font-style:normal;font-size:1.3rem;color:var(--sky);transition:transform .2s}
+.fa{display:none;padding:2px 22px 18px;color:var(--mu);font-size:.9rem}
+.fi.open .fa{display:block}.fi.open .fq i{transform:rotate(45deg);color:var(--em)}
+/* final */
+.final{text-align:center;background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(56,189,248,.12));border:1px solid var(--bd);border-radius:24px;padding:48px 24px}
+footer{border-top:1px solid var(--bd2);padding:32px 0;text-align:center;color:var(--mu);font-size:.84rem}
+footer a{color:var(--sky)}
+/* sticky mobile */
+#sb{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(3,7,18,.95);backdrop-filter:blur(12px);border-top:1px solid var(--bd);transform:translateY(110%);transition:transform .3s}
+#sb.on{transform:none}#sb .btn{width:100%}
+@media(min-width:821px){#sb{display:none}body{padding-bottom:0}}
+#solicitar{scroll-margin-top:90px}.micro{font-size:.8rem;color:var(--mu);margin-bottom:6px}
+/* form states (novo) */
+[hidden]{display:none!important}
+.ok{text-align:center;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.4);border-radius:14px;padding:22px 18px}
+.ok b{display:block;font-size:1.08rem;color:#6ee7b7;margin-bottom:6px}.ok span{display:block;font-size:.88rem;color:#cbd5e1;margin-bottom:14px}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.js .rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a href="#" class="logo">DataLab<span>.reels</span></a>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="lang-btns">
-        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-        <button id="btn-pt" onclick="setLang('pt')">PT</button>
-        <button id="btn-es" onclick="setLang('es')">ES</button>
-      </div>
-      <a href="#pricing" class="btn" style="padding:9px 16px;font-size:0.85rem;" data-i18n="nav_cta">Get My Audit</a>
-    </div>
+<header><div class="wrap nav">
+  <a href="#topo" class="brand" aria-label="DataLab Reels">
+    <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#071024" stroke="#1e293b" stroke-width="3"/><rect x="14" y="16" width="24" height="7" rx="3.5" fill="#10b981"/><rect x="14" y="28.5" width="36" height="7" rx="3.5" fill="#38bdf8"/><rect x="14" y="41" width="21" height="7" rx="3.5" fill="#64748b"/><circle cx="32" cy="32" r="11" fill="#071024"/><path d="M29 26l10 6-10 6z" fill="#10b981"/></svg>
+    <span>DataLab<span class="grad">.reels</span></span></a>
+  <nav class="nav-l" aria-label="Principal">
+    <a href="#como" data-en="How it works" data-es="Cómo funciona">Como funciona</a><a href="#amostra" data-en="Example" data-es="Ejemplo">Exemplo</a><a href="#planos" data-en="Pricing" data-es="Precios">Planos</a><a href="#faq" data-en="FAQ" data-es="Dudas">Dúvidas</a></nav>
+  <div class="nav-r">
+    <div class="lang" role="group" aria-label="Idioma / Language"><button data-l="pt" onclick="setLang('pt')" aria-pressed="true">PT</button><button data-l="en" onclick="setLang('en')" aria-pressed="false">EN</button><button data-l="es" onclick="setLang('es')" aria-pressed="false">ES</button></div>
+    <a href="#solicitar" class="btn sm" data-en="Get my audit" data-es="Quiero mi auditoría">Quero minha auditoria</a>
   </div>
-</header>
-<main>
-  <div class="container hero">
-    <span class="badge" data-i18n="badge">Automated Reels Intelligence for Brands & Agencies</span>
-    <h1 data-i18n="hero_title">Stop posting in the dark. Uncover what blocks your Reels growth & get 10 ready-to-film scripts.</h1>
-    <p data-i18n="hero_sub">We analyze your last 15 Reels using public data and deliver an interactive dashboard, retention blind spots, a 15-day roadmap, and 10 high-converting scripts within 5 minutes.</p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="#pricing" class="btn" data-i18n="cta_main">Unlock Full Audit ($67) →</a>
-      <a href="#free-preview" class="btn btn-outline" data-i18n="cta_free">Get Free Preview</a>
+</div></header>
+
+<main id="topo">
+<div class="wrap">
+<section class="hero" style="padding-bottom:40px">
+  <div>
+    <span class="badge" data-en="Reels audit for businesses &amp; agencies" data-es="Auditoría de Reels para empresas y agencias">Auditoria de Reels para empresas e agências</span>
+    <h1 data-en="Stop posting in the dark. <span class='grad'>See what blocks sales</span> on your Reels and get 10 scripts ready to shoot." data-es="Deja de publicar a ciegas. <span class='grad'>Descubre qué frena las ventas</span> de tus Reels y recibe 10 guiones listos para grabar."> Pare de postar no escuro. <span class="grad">Veja o que trava as vendas</span> dos seus Reels e receba 10 roteiros prontos para gravar.</h1>
+    <p class="lead" data-en="We analyze your last 15 Reels from public data and deliver an interactive dashboard, your blind spots, a 15-day plan and 10 scripts with hooks and CTAs." data-es="Analizamos tus últimos 15 Reels con datos públicos y entregamos un panel interactivo, tus puntos ciegos, un plan de 15 días y 10 guiones con gancho y CTA.">Analisamos seus últimos 15 Reels a partir de dados públicos e entregamos um painel interativo, seus pontos cegos, um plano de 15 dias e 10 roteiros com gancho e CTA.</p>
+    <div class="cta-row">
+      <a href="#solicitar" class="btn" data-en="Get my free preview →" data-es="Quiero mi vista previa gratis →">Quero minha prévia grátis →</a>
+      <a href="#amostra" class="btn ghost" data-en="See an example" data-es="Ver un ejemplo">Ver um exemplo</a>
     </div>
+    <p class="micro" data-en="Free preview, no card and no password." data-es="Vista previa gratis, sin tarjeta y sin contraseña.">Prévia grátis, sem cartão e sem senha.</p>
     <div class="stats">
-      <div class="stat-box"><strong>15 Reels</strong><span>Deep Data X-Ray</span></div>
-      <div class="stat-box"><strong>10 Scripts</strong><span>Hook, Body & CTA</span></div>
-      <div class="stat-box"><strong>5 Mins</strong><span>Automated Delivery</span></div>
-      <div class="stat-box"><strong>No Password</strong><span>100% Public Data</span></div>
+      <div class="stat"><b>15</b><span data-en="Reels analyzed" data-es="Reels analizados">Reels analisados</span></div>
+      <div class="stat"><b>10</b><span data-en="Scripts ready to shoot" data-es="Guiones listos para grabar">Roteiros prontos</span></div>
+      <div class="stat"><b data-en="5 min" data-es="5 min">5 min</b><span data-en="Delivery time" data-es="Plazo de entrega">Prazo de entrega</span></div>
+      <div class="stat"><b data-en="No login" data-es="Sin contraseña">Sem senha</b><span data-en="Public data only" data-es="Solo datos públicos">Só dados públicos</span></div>
     </div>
   </div>
-  <section id="sample">
-    <div class="container">
-      <h2>Inside your DataLab Dashboard</h2>
-      <p class="sub">Illustrative sample report showing the exact diagnostic structure delivered to your inbox.</p>
-      <div class="sample-box">
-        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:20px;">
-          <div><strong>@studio.sample</strong> • <span style="color:var(--muted);">15 Reels Analyzed</span></div>
-          <div style="background:rgba(16,185,129,0.15);color:var(--accent2);padding:8px 16px;border-radius:10px;font-weight:800;">Score: 76 / 100</div>
-        </div>
-        <p style="color:var(--muted);"><strong>Top Pillars:</strong> Behind the Scenes (62%) • Objection Handling (26%) • Generic Promo (12%)</p>
-        <div class="blindspot"><strong>⚠ Detected Blind Spot:</strong> Videos opening with slow greetings lose 64% of viewers before second 3.</div>
-        <div style="background:#090d16;padding:16px;border-radius:10px;border:1px solid var(--border);font-size:0.92rem;">
-          <strong style="color:#a5b4fc;">Script #1 Sample (Hook 0–3s):</strong> “3 hidden mistakes destroying your client retention this month.”<br/>
-          <span style="color:var(--muted);">Body: Break down mistake #1 with a visual example. CTA: “Comment AUDIT for our checklist.”</span>
-        </div>
-      </div>
+  <div class="form" id="solicitar">
+    <h3 data-en="Start your audit" data-es="Empieza tu auditoría">Comece sua auditoria</h3>
+    <p data-en="Tell us your profile and pick an option. Instant checkout (Card, Apple Pay, PayPal) and automatic delivery in 5 minutes." data-es="Indícanos tu perfil y elige una opción. Pago instantáneo (tarjeta, Apple Pay, PayPal) y entrega automática en 5 minutos.">Informe seu perfil e escolha uma opção. Pagamento instantâneo (cartão, Apple Pay, PayPal) e entrega automática em 5 minutos.</p>
+    <form id="f">
+      <div class="field"><label for="u" data-en="Your Instagram @ *" data-es="Tu @ de Instagram *">Seu @ do Instagram *</label><input id="u" required autocomplete="off" autocapitalize="none" placeholder="@suaclinica" data-en-ph="@yourbusiness" data-es-ph="@tunegocio"></div>
+      <div class="field"><label for="p" data-en="Option *" data-es="Opción *">Opção *</label>
+        <select id="p"><option value="free" data-en="Free preview (charts + blind spots)" data-es="Vista previa gratis (gráficos + puntos ciegos)">Prévia grátis (gráficos + pontos cegos)</option><option value="single" data-en="Full audit: 15-day plan + 10 scripts (US$ 67)" data-es="Auditoría completa: plan de 15 días + 10 guiones (US$ 67)">Auditoria completa: plano de 15 dias + 10 roteiros (US$ 67)</option><option value="agency" data-en="Agencies: white-label, up to 10 audits/mo (US$ 147/mo)" data-es="Agencias: marca blanca, hasta 10 auditorías/mes (US$ 147/mes)">Agências: white-label, até 10 auditorias/mês (US$ 147/mês)</option></select></div>
+      <div class="field"><label for="c" data-en="Direct competitor (optional)" data-es="Competidor directo (opcional)">Concorrente direto (opcional)</label><input id="c" autocomplete="off" autocapitalize="none" placeholder="@concorrente" data-en-ph="@competitor" data-es-ph="@competidor"></div>
+      <div class="field" id="ef"><label for="e" data-en="Your email * (we send the preview here)" data-es="Tu correo * (te enviamos la vista previa aquí)">Seu e-mail * (enviamos a prévia aqui)</label><input id="e" type="email" autocomplete="email" autocapitalize="none" placeholder="voce@empresa.com" data-en-ph="you@company.com" data-es-ph="tu@empresa.com"></div>
+      <div class="blind" id="msg" role="alert" style="margin-bottom:12px" hidden></div>
+      <button class="btn" id="go" type="submit">Get my free preview →</button>
+      <div class="note" data-en="🔒 We never ask for your Instagram login or password." data-es="🔒 Nunca pedimos tu usuario ni tu contraseña de Instagram.">🔒 Nunca pedimos login ou senha do seu Instagram.</div>
+    </form>
+    <div class="ok" id="ok" role="status" hidden>
+      <b data-en="✅ Request received!" data-es="✅ ¡Solicitud recibida!">✅ Pedido recebido!</b>
+      <span data-en="Delivered to your email in 5 minutes. Check your spam folder if it does not show up." data-es="Entregado en tu correo en 5 minutos. Revisa tu carpeta de spam si no aparece." >Entregue no seu e-mail em 5 minutos. Confira a pasta de spam se não aparecer.</span>
+      <button class="btn ghost" id="again" type="button" data-en="Request another" data-es="Pedir otra" >Pedir outra</button>
     </div>
-  </section>
-  <section id="pricing">
-    <div class="container">
-      <h2 data-i18n="price_title">Instant Checkout. Automated Delivery.</h2>
-      <p class="sub" data-i18n="price_sub">Choose your plan below. Your report is generated and emailed automatically right after payment.</p>
-      <div class="grid-3">
-        <div class="card">
-          <div>
-            <span class="step-tag">STARTER</span>
-            <h3>Free Preview</h3>
-            <div class="price">$0</div>
-            <ul>
-              <li>Visual metrics & charts</li>
-              <li>Main retention blind spot</li>
-              <li>15-day plan & 10 scripts locked</li>
-            </ul>
-          </div>
-          <a href="#free-preview" class="btn btn-outline" style="width:100%;">Request Free Preview</a>
-        </div>
-        <div class="card featured">
-          <div>
-            <span class="step-tag">MOST POPULAR</span>
-            <h3>Full Reels Audit + 10 Scripts</h3>
-            <div class="price">$67 <small>one-time</small></div>
-            <ul>
-              <li>Complete 15-Reels AI breakdown</li>
-              <li>15-day growth & hook roadmap</li>
-              <li>10 ready-to-film scripts (Hook + CTA)</li>
-              <li>Delivered to your email in 5 minutes</li>
-            </ul>
-          </div>
-          <a id="buy67Btn" href="#" target="_blank" class="btn" style="width:100%;">Buy Full Audit — $67 →</a>
-        </div>
-        <div class="card">
-          <div>
-            <span class="step-tag">FOR AGENCIES</span>
-            <h3>Agency White-Label</h3>
-            <div class="price">$147 <small>/month</small></div>
-            <ul>
-              <li>Up to 10 full audits every month</li>
-              <li>100% White-Label (no DataLab branding)</li>
-              <li>Close & retain high-ticket Reels clients</li>
-              <li>Cancel anytime in 1 click</li>
-            </ul>
-          </div>
-          <a id="buy147Btn" href="#" target="_blank" class="btn btn-green" style="width:100%;">Start Agency Plan — $147/mo →</a>
-        </div>
-      </div>
+    <noscript><p class="note">Please enable JavaScript to continue.</p></noscript>
+  </div>
+</section>
+
+<section id="como"><div class="head rv"><span class="badge" data-en="How it works" data-es="Cómo funciona">Como funciona</span><h2 data-en="From your profile to scripts in <span class='grad'>3 steps</span>" data-es="De tu perfil a los guiones en <span class='grad'>3 pasos</span>">Do seu perfil aos roteiros em <span class="grad">3 passos</span></h2></div>
+  <div class="grid3">
+    <div class="card rv"><small data-en="Step 01 • Data" data-es="Paso 01 • Datos">Passo 01 • Dados</small><h3 data-en="X-ray of your last 15 Reels" data-es="Rayos X de tus últimos 15 Reels">Raio-X dos seus últimos 15 Reels</h3><p data-en="We collect views, likes, comments and format from your public profile." data-es="Recopilamos vistas, me gusta, comentarios y formato de tu perfil público.">Coletamos visualizações, curtidas, comentários e formato do seu perfil público.</p></div>
+    <div class="card rv"><small data-en="Step 02 • Diagnosis" data-es="Paso 02 • Diagnóstico">Passo 02 • Diagnóstico</small><h3 data-en="Blind spots and winning topics" data-es="Puntos ciegos y temas que funcionan">Pontos cegos e temas que funcionam</h3><p data-en="We show which topics and formats bring more engagement and which mistakes hold your Reels back." data-es="Mostramos qué temas y formatos generan más interacción y qué errores frenan tus Reels.">Mostramos quais temas e formatos geram mais engajamento e quais erros seguram seus Reels.</p></div>
+    <div class="card rv"><small data-en="Step 03 • Action" data-es="Paso 03 • Acción">Passo 03 • Ação</small><h3 data-en="Dashboard + 10 scripts" data-es="Panel + 10 guiones">Painel online + 10 roteiros</h3><p data-en="You get a private link with charts, a 15-day plan and 10 scripts ready to record." data-es="Recibes un enlace privado con gráficos, un plan de 15 días y 10 guiones listos para grabar.">Você recebe um link privado com gráficos, plano de 15 dias e 10 roteiros prontos para gravar.</p></div>
+  </div></section>
+
+<section id="amostra"><div class="head rv"><span class="badge" data-en="Example report" data-es="Ejemplo de informe">Exemplo de relatório</span><h2 data-en="See what you get <span class='grad'>inside the dashboard</span>" data-es="Mira lo que recibes <span class='grad'>dentro del panel</span>">Veja o que você recebe <span class="grad">por dentro do painel</span></h2></div>
+  <div class="demo rv">
+    <div class="demo-top"><div><h3>@clinica.exemplo</h3><p style="font-size:.85rem;color:var(--mu)" data-en="15 Reels analyzed" data-es="15 Reels analizados">15 Reels analisados</p><span class="ill" data-en="Illustrative example • fictional data" data-es="Ejemplo ilustrativo • datos ficticios">Exemplo ilustrativo • dados fictícios</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="text-align:right;font-size:.78rem;color:var(--mu)" data-en="Efficiency score" data-es="Puntuación de eficiencia">Score de<br>eficiência</div><div class="ring" role="img" aria-label="76 de 100"><div>76</div></div></div></div>
+    <div class="dg">
+      <div class="panel"><h4 data-en="Engagement by pillar" data-es="Interacción por pilar">Engajamento por pilar</h4>
+        <div class="bar"><div><span data-en="Behind the scenes" data-es="Detrás de cámaras">Bastidores</span><b>62%</b></div><div class="trk"><i style="width:62%"></i></div></div>
+        <div class="bar"><div><span data-en="Objection handling" data-es="Manejo de objeciones">Quebra de objeção</span><b>26%</b></div><div class="trk"><i style="width:26%"></i></div></div>
+        <div class="bar"><div><span data-en="Generic institutional" data-es="Institucional genérico">Institucional genérico</span><b>12%</b></div><div class="trk"><i style="width:12%"></i></div></div>
+        <div class="blind" data-en="<b>⚠️ Blind spot:</b> videos that open with a long greeting tend to lose attention right at the start." data-es="<b>⚠️ Punto ciego:</b> los videos que empiezan con un saludo largo tienden a perder la atención desde el inicio.">
+          <b>⚠️ Ponto cego:</b> vídeos que abrem com saudação longa tendem a perder a atenção logo no início.</div></div>
+      <div class="panel"><h4 data-en="Script sample" data-es="Muestra de guion">Amostra de roteiro</h4>
+        <div class="scr" data-en="<b>Hook (0–3s):</b> “3 mistakes that stain your contact lenses in a year.”<br><b>Body:</b> explain mistake #1 in plain words.<br><b>CTA:</b> “Book your evaluation via the link in bio.”" data-es="<b>Gancho (0–3 s):</b> “3 errores que manchan tus lentes de contacto en un año.”<br><b>Cuerpo:</b> explica el error n.º 1 con palabras simples.<br><b>CTA:</b> “Agenda tu evaluación en el enlace de la bio.”"><b>Gancho (0–3s):</b> “3 erros que fazem sua lente manchar em 1 ano.”<br><b>Corpo:</b> explique o erro #1 em linguagem simples.<br><b>CTA:</b> “Agende sua avaliação pelo link da bio.”</div>
+        <div class="lockwrap"><div class="lock" aria-hidden="true">Roteiro 2: •••••••• ••••• ••••••<br>Roteiro 3: ••••••• •••• ••••••••</div><span data-en="🔒 9 more scripts in the full audit" data-es="🔒 9 guiones más en la auditoría completa">🔒 +9 roteiros na auditoria completa</span></div></div>
     </div>
-  </section>
-  <section id="free-preview">
-    <div class="container">
-      <div class="preview-box">
-        <h3 style="text-align:center;margin-bottom:8px;">Get Your Free Reels Preview</h3>
-        <p style="text-align:center;color:var(--muted);font-size:0.9rem;margin-bottom:22px;">Enter your public Instagram handle and email. No credit card required.</p>
-        <form id="previewForm">
-          <div class="field"><label>Instagram @username *</label><input type="text" id="igUser" placeholder="@yourprofile" required /></div>
-          <div class="field"><label>Best Email *</label><input type="email" id="leadEmail" placeholder="you@company.com" required /></div>
-          <button type="submit" class="btn" style="width:100%;">Send My Free Preview →</button>
-          <p id="msgStatus" style="text-align:center;margin-top:12px;font-size:0.9rem;font-weight:600;"></p>
-        </form>
-        <p style="font-size:0.8rem;color:var(--muted);text-align:center;margin-top:14px;">🔒 No password required • 💳 Card, Apple Pay & PayPal supported</p>
-      </div>
-    </div>
-  </section>
+    <div style="text-align:center;margin-top:24px"><a href="#solicitar" class="btn" data-en="I want this for my profile →" data-es="Quiero esto para mi perfil →">Quero isso para o meu perfil →</a></div>
+  </div></section>
+
+<section id="comparativo"><div class="head rv"><span class="badge" data-en="Before vs. after" data-es="Antes vs. después">Antes vs. depois</span><h2 data-en="Posting blindly vs. <span class='grad'>posting with data</span>" data-es="Publicar a ciegas vs. <span class='grad'>publicar con datos</span>">Postar no escuro vs. <span class="grad">postar com dados</span></h2></div>
+  <div class="tw rv"><table><thead><tr><th data-en="Criteria" data-es="Criterio">Critério</th><th data-en="Without data" data-es="Sin datos">Sem dados</th><th data-en="With DataLab audit" data-es="Con auditoría DataLab">Com auditoria DataLab</th></tr></thead><tbody>
+    <tr><td><b data-en="First 3 seconds" data-es="Primeros 3 segundos">Primeiros 3 segundos</b></td><td class="bad" data-en="Slow greetings and generic intros" data-es="Saludos lentos e intros genéricas">Saudações lentas e introduções genéricas</td><td class="good" data-en="Hooks based on what already works for you" data-es="Ganchos basados en lo que ya funciona en tu perfil">Ganchos baseados no que já funciona no seu perfil</td></tr>
+    <tr><td><b data-en="Topic choice" data-es="Elección de temas">Escolha de temas</b></td><td class="bad" data-en="Guesswork and trends that attract browsers" data-es="Corazonadas y tendencias que solo atraen curiosos">Achismo e trends que atraem só curiosos</td><td class="good" data-en="Based on pillars with the best engagement" data-es="Basada en los pilares con mejor interacción">Baseada nos pilares com melhor engajamento</td></tr>
+    <tr><td><b data-en="Scripting" data-es="Guiones">Roteiros</b></td><td class="bad" data-en="Hours on camera without knowing what to say" data-es="Horas frente a la cámara sin saber qué decir">Horas na frente da câmera sem saber o que falar</td><td class="good" data-en="10 scripts with hook, body and CTA" data-es="10 guiones con gancho, cuerpo y CTA">10 roteiros com gancho, corpo e CTA</td></tr>
+    <tr><td><b data-en="Account safety" data-es="Seguridad de la cuenta">Segurança da conta</b></td><td class="bad" data-en="Tools that ask for your login" data-es="Herramientas que piden tu usuario y contraseña">Ferramentas que pedem seu login</td><td class="good" data-en="No access to your account, public data only" data-es="Sin acceso a tu cuenta, solo datos públicos">Sem acesso à sua conta, só dados públicos</td></tr>
+  </tbody></table></div></section>
+
+<section id="planos"><div class="head rv"><span class="badge" data-en="Pricing" data-es="Precios">Planos</span><h2 data-en="Start free, <span class='grad'>unlock when it makes sense</span>" data-es="Empieza gratis, <span class='grad'>desbloquea cuando tenga sentido</span>">Comece grátis, <span class="grad">desbloqueie quando fizer sentido</span></h2></div>
+  <div class="grid3">
+    <div class="card price rv"><h3 data-en="Free preview" data-es="Vista previa gratis">Prévia grátis</h3><div class="amt"><span data-en="US$ 0" data-es="US$ 0">US$ 0</span></div>
+      <ul><li data-en="Dashboard with your charts" data-es="Panel con tus gráficos">Painel com seus gráficos</li><li data-en="Blind spots identified" data-es="Puntos ciegos identificados">Pontos cegos identificados</li><li data-en="Action plan and scripts locked" data-es="Plan de acción y guiones bloqueados">Plano de ação e roteiros bloqueados</li></ul><a href="#solicitar" class="btn ghost" data-plan="free" data-en="Request preview" data-es="Pedir vista previa">Pedir prévia</a></div>
+    <div class="card price hot rv"><span class="tag" data-en="Complete" data-es="Completo">Completo</span><h3 data-en="Full audit" data-es="Auditoría completa">Auditoria completa</h3><div class="amt"><span data-en="US$ 67" data-es="US$ 67">US$ 67</span> <small data-en="one-time" data-es="pago único">pagamento único</small></div>
+      <ul><li data-en="Everything in the preview" data-es="Todo lo de la vista previa">Tudo da prévia</li><li data-en="15-day action plan" data-es="Plan de acción de 15 días">Plano de ação de 15 dias</li><li data-en="10 scripts with hook, body and CTA" data-es="10 guiones con gancho, cuerpo y CTA">10 roteiros com gancho, corpo e CTA</li><li data-en="Private link, mobile friendly" data-es="Enlace privado, optimizado para móvil">Link privado, otimizado para celular</li></ul><a href="#solicitar" class="btn" data-plan="single" data-en="Get the full audit" data-es="Quiero la auditoría completa">Quero a auditoria completa</a></div>
+    <div class="card price rv"><h3 data-en="For agencies" data-es="Para agencias">Para agências</h3><div class="amt"><span data-en="US$ 147" data-es="US$ 147">US$ 147</span><small data-en="/month" data-es="/mes">/mês</small></div>
+      <ul><li data-en="Up to 10 audits per month" data-es="Hasta 10 auditorías por mes">Até 10 auditorias por mês</li><li data-en="White-label: no DataLab branding" data-es="Marca blanca: sin la marca DataLab">White-label: sem a marca DataLab</li><li data-en="Present it as your agency's intelligence" data-es="Preséntalo como inteligencia de tu agencia">Apresente como inteligência da sua agência</li></ul><a href="#solicitar" class="btn ghost" data-plan="agency" data-en="Get the agency plan" data-es="Quiero el plan para agencias">Quero o plano para agências</a></div>
+  </div></section>
+
+<section id="faq"><div class="head rv"><span class="badge" data-en="FAQ" data-es="Dudas">Perguntas frequentes</span><h2 data-en="Questions before <span class='grad'>you start</span>" data-es="Preguntas antes de <span class='grad'>empezar</span>">Dúvidas antes de <span class="grad">começar</span></h2></div>
+  <div class="faq rv">
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="Do you need my Instagram password?" data-es="¿Necesitan mi contraseña de Instagram?">Vocês precisam da senha do meu Instagram?</span><i>+</i></button><div class="fa" data-en="No. We never ask for a password or admin access. We analyze only the public data of your latest Reels." data-es="No. Nunca pedimos contraseña ni acceso administrativo. Analizamos solo los datos públicos de tus últimos Reels.">Não. Nunca pedimos senha ou acesso administrativo. Analisamos apenas os dados públicos dos seus últimos Reels.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="How long does it take?" data-es="¿Cuánto tarda?">Em quanto tempo recebo?</span><i>+</i></button><div class="fa" data-en="Automatically, within 5 minutes after checkout (or after you request the free preview). You get a private link by email that works on mobile and desktop." data-es="De forma automática, en 5 minutos tras el pago (o tras pedir la vista previa gratis). Recibes un enlace privado por correo que abre en móvil y en computadora.">De forma automática, em até 5 minutos após o pagamento (ou após pedir a prévia grátis). Você recebe por e-mail um link privado que abre no celular e no computador.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="How do I pay?" data-es="¿Cómo se paga?">Como faço o pagamento?</span><i>+</i></button><div class="fa" data-en="Instantly at a secure checkout with credit or debit card, Apple Pay or PayPal. The full report is released automatically as soon as payment is confirmed." data-es="Al instante en un checkout seguro con tarjeta de crédito o débito, Apple Pay o PayPal. El informe completo se libera automáticamente en cuanto se confirma el pago.">Na hora, em um checkout seguro com cartão de crédito ou débito, Apple Pay ou PayPal. O relatório completo é liberado automaticamente assim que o pagamento é confirmado.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="Does it work for small profiles?" data-es="¿Funciona con perfiles pequeños?">Funciona se meu perfil for pequeno?</span><i>+</i></button><div class="fa" data-en="Yes, as long as the profile is public and has at least 10 to 15 Reels published." data-es="Sí, siempre que el perfil sea público y tenga al menos 10 a 15 Reels publicados.">Sim, desde que o perfil seja público e tenha pelo menos 10 a 15 Reels publicados.</div></div>
+    <div class="fi"><button class="fq" aria-expanded="false"><span data-en="How does the agency plan work?" data-es="¿Cómo funciona el plan para agencias?">Como funciona o plano para agências?</span><i>+</i></button><div class="fa" data-en="You get up to 10 full audits per month without our branding, ready to present to your clients." data-es="Recibes hasta 10 auditorías completas al mes sin nuestra marca, listas para presentar a tus clientes.">Você recebe até 10 auditorias completas por mês sem a nossa marca, prontas para apresentar aos seus clientes.</div></div>
+  </div></section>
+
+<section style="padding-top:20px"><div class="final rv"><h2 data-en="Find out what is holding your Reels back" data-es="Descubre qué está frenando tus Reels">Descubra o que está segurando os seus Reels</h2><p class="lead" style="margin:0 auto 22px" data-en="Request your free preview and see your charts and blind spots first." data-es="Pide tu vista previa gratis y mira primero tus gráficos y puntos ciegos.">Peça sua prévia grátis e veja primeiro seus gráficos e pontos cegos.</p><a href="#solicitar" class="btn" data-en="Get my free preview →" data-es="Quiero mi vista previa gratis →">Quero minha prévia grátis →</a></div></section>
+</div>
 </main>
-<footer><div class="container"><strong>DataLab Reels</strong> • Automated Instagram Reels Intelligence (@datalab.reels)</div></footer>
+
+<footer><div class="wrap"><b>DataLab Reels</b> • <span data-en="Reels audit for businesses and agencies" data-es="Auditoría de Reels para empresas y agencias">Auditoria de Reels para empresas e agências</span><br>Instagram: <a href="https://instagram.com/datalab.reels" rel="noopener">@datalab.reels</a> • <span data-en="Analysis based on public data only." data-es="Análisis basado solo en datos públicos.">Análise baseada apenas em dados públicos.</span><br><span data-en="Not affiliated with Instagram or Meta." data-es="Sin afiliación con Instagram ni Meta.">Sem afiliação com o Instagram ou a Meta.</span></div></footer>
+
+<div id="sb"><a href="#solicitar" class="btn" data-en="Get my free preview →" data-es="Quiero mi vista previa gratis →">Quero minha prévia grátis →</a></div>
+
 <script>
-  const CHECKOUT_67_URL = "COLE_AQUI_LINK_LEMONSQUEEZY_67";
-  const CHECKOUT_147_URL = "COLE_AQUI_LINK_LEMONSQUEEZY_147";
-  const N8N_FREE_PREVIEW_WEBHOOK = "COLE_AQUI_WEBHOOK_N8N_PREVIA";
+/* ============================================================
+   CONFIGURAÇÃO — PREENCHA ESTAS 3 CONSTANTES NA PRÓXIMA ETAPA
+   ============================================================ */
+var LEMON_67_URL = 'COLE_AQUI_A_URL_DO_CHECKOUT_LEMON_67';          // ex.: https://SUA-LOJA.lemonsqueezy.com/checkout/buy/xxxxxxxx
+var LEMON_147_URL = 'COLE_AQUI_A_URL_DO_CHECKOUT_LEMON_147';        // ex.: https://SUA-LOJA.lemonsqueezy.com/checkout/buy/yyyyyyyy
+var N8N_PREVIEW_WEBHOOK = 'COLE_AQUI_A_URL_DO_WEBHOOK_N8N_PREVIA';  // ex.: https://SEU-TUNEL.exemplo.com/webhook/datalab-preview
+/* ============================================================ */
 
-  document.getElementById("buy67Btn").href = CHECKOUT_67_URL;
-  document.getElementById("buy147Btn").href = CHECKOUT_147_URL;
+var lang='en';
+var TTL={pt:['DataLab Reels — Auditoria de Reels com 10 roteiros prontos','Auditoria dos seus últimos 15 Reels com painel interativo, pontos cegos e 10 roteiros prontos para gravar. Só dados públicos, sem senha. Entrega em 5 minutos.'],en:['DataLab Reels — Reels audit with 10 ready-to-shoot scripts','Audit of your last 15 Reels with an interactive dashboard, blind spots and 10 scripts ready to shoot. Public data only, no password. Delivered in 5 minutes.'],es:['DataLab Reels — Auditoría de Reels con 10 guiones listos','Auditoría de tus últimos 15 Reels con panel interactivo, puntos ciegos y 10 guiones listos para grabar. Solo datos públicos, sin contraseña. Entrega en 5 minutos.']};
 
-  const dict = {
-    en: { nav_cta:"Get My Audit", badge:"Automated Reels Intelligence for Brands & Agencies", hero_title:"Stop posting in the dark. Uncover what blocks your Reels growth & get 10 ready-to-film scripts.", hero_sub:"We analyze your last 15 Reels using public data and deliver an interactive dashboard, retention blind spots, a 15-day roadmap, and 10 high-converting scripts within 5 minutes.", cta_main:"Unlock Full Audit ($67) →", cta_free:"Get Free Preview", price_title:"Instant Checkout. Automated Delivery.", price_sub:"Choose your plan below. Your report is generated and emailed automatically right after payment." },
-    pt: { nav_cta:"Quero minha auditoria", badge:"Inteligência Automatizada de Reels para Empresas e Agências", hero_title:"Pare de postar no escuro. Veja o que trava seus Reels e receba 10 roteiros prontos.", hero_sub:"Analisamos seus últimos 15 Reels com dados públicos e entregamos painel interativo, pontos cegos, plano de 15 dias e 10 roteiros em 5 minutos.", cta_main:"Auditoria Completa ($67) →", cta_free:"Pedir Prévia Grátis", price_title:"Checkout Instantâneo. Entrega Automática.", price_sub:"Escolha seu plano abaixo. Seu relatório é gerado e enviado por e-mail logo após o pagamento." },
-    es: { nav_cta:"Quiero mi auditoría", badge:"Inteligencia Automatizada de Reels para Empresas y Agencias", hero_title:"Deja de publicar a ciegas. Descubre qué frena tus Reels y recibe 10 guiones listos.", hero_sub:"Analizamos tus últimos 15 Reels con datos públicos y entregamos panel interactivo, puntos ciegos, plan de 15 días y 10 guiones en 5 minutos.", cta_main:"Auditoría Completa ($67) →", cta_free:"Pedir Vista Previa", price_title:"Pago Instantáneo. Entrega Automática.", price_sub:"Elige tu plan abajo. Tu informe se genera y envía por correo automáticamente tras el pago." }
-  };
+var BTN={
+  free:{pt:'Receber minha prévia grátis →',en:'Get my free preview →',es:'Recibir mi vista previa gratis →'},
+  single:{pt:'Comprar auditoria — US$ 67 →',en:'Buy full audit — US$ 67 →',es:'Comprar auditoría — US$ 67 →'},
+  agency:{pt:'Assinar plano — US$ 147/mês →',en:'Start agency plan — US$ 147/mo →',es:'Suscribirme — US$ 147/mes →'}
+};
+var SENDING={pt:'Enviando…',en:'Sending…',es:'Enviando…'};
+var ERR={pt:'Digite um @ válido do Instagram (letras, números, ponto ou _).',en:'Enter a valid Instagram @ (letters, numbers, dot or _).',es:'Ingresa un @ válido de Instagram (letras, números, punto o _).'};
+var ERR_EMAIL={pt:'Digite um e-mail válido.',en:'Enter a valid email address.',es:'Ingresa un correo válido.'};
+var MSG_FAIL={pt:'Não foi possível enviar agora. Tente novamente em instantes.',en:'We could not send your request right now. Please try again in a moment.',es:'No pudimos enviar tu solicitud ahora. Inténtalo de nuevo en un momento.'};
+var MSG_CFG={pt:'Este pedido ainda não está disponível. Tente novamente mais tarde.',en:'This option is not available yet. Please try again later.',es:'Esta opción aún no está disponible. Inténtalo más tarde.'};
 
-  function setLang(l) {
-    document.querySelectorAll(".lang-btns button").forEach(b => b.classList.remove("active"));
-    document.getElementById("btn-" + l).classList.add("active");
-    document.querySelectorAll("[data-i18n]").forEach(el => { if (dict[l][el.dataset.i18n]) el.textContent = dict[l][el.dataset.i18n]; });
-  }
+var HANDLE=/^[A-Za-z0-9._]{1,30}$/;
+var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function clean(v){return v.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/[\/?#].*$/,'').replace(/^@+/,'')}
 
-  document.getElementById("previewForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const st = document.getElementById("msgStatus");
-    st.style.color = "#a5b4fc"; st.textContent = "Generating your preview request...";
-    try {
-      await fetch(N8N_FREE_PREVIEW_WEBHOOK, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: document.getElementById("igUser").value.trim(), email: document.getElementById("leadEmail").value.trim() })
-      });
-      st.style.color = "#10b981"; st.textContent = "✓ Success! Check your inbox in 3–5 minutes.";
-      e.target.reset();
-    } catch {
-      st.style.color = "#f87171"; st.textContent = "Connection error. Please try again.";
-    }
-  });
+function updateUI(){
+  var p=document.getElementById('p').value,free=(p==='free');
+  document.getElementById('ef').hidden=!free;
+  document.getElementById('e').required=free;
+  document.getElementById('go').textContent=BTN[p][lang];
+}
+function setLang(l){
+  lang=l;document.documentElement.lang={pt:'pt-BR',en:'en',es:'es'}[l];
+  document.querySelectorAll('[data-en]').forEach(function(e){if(!e.dataset.pt)e.dataset.pt=e.innerHTML;e.innerHTML=l==='pt'?e.dataset.pt:(e.dataset[l]||e.dataset.en)});
+  document.querySelectorAll('[data-en-ph]').forEach(function(e){if(!e.dataset.ph)e.dataset.ph=e.placeholder;e.placeholder=l==='pt'?e.dataset.ph:(e.dataset[l+'Ph']||e.dataset.enPh)});
+  document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===l)});
+  document.title=TTL[l][0];var m=document.querySelector('meta[name=description]');if(m)m.content=TTL[l][1];
+  updateUI();hideMsg();
+  try{localStorage.setItem('dl_lang',l)}catch(e){}
+}
+(function(){var s=null;try{s=localStorage.getItem('dl_lang')}catch(e){}
+  setLang((s&&TTL[s])?s:'en')})();
+
+var fForm=document.getElementById('f'),fu=document.getElementById('u'),fc=document.getElementById('c'),fe=document.getElementById('e'),
+    fp=document.getElementById('p'),btnGo=document.getElementById('go'),boxMsg=document.getElementById('msg'),boxOk=document.getElementById('ok'),busy=false;
+function showMsg(t){boxMsg.textContent=t;boxMsg.hidden=false}
+function hideMsg(){var b=document.getElementById('msg');if(b)b.hidden=true}
+
+function goCheckout(base,data){
+  if(!/^https:\/\//i.test(base)){showMsg(MSG_CFG[lang]);return}
+  var q=[];for(var k in data){if(data[k])q.push('checkout[custom]['+k+']='+encodeURIComponent(data[k]))}
+  window.location.href=base+(base.indexOf('?')>-1?'&':'?')+q.join('&');
+}
+function sendPreview(payload){
+  if(!/^https?:\/\//i.test(N8N_PREVIEW_WEBHOOK)){showMsg(MSG_CFG[lang]);return}
+  busy=true;btnGo.disabled=true;btnGo.textContent=SENDING[lang];
+  var ctl=('AbortController' in window)?new AbortController():null;
+  var t=setTimeout(function(){if(ctl)ctl.abort()},20000);
+  var opts={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)};
+  if(ctl)opts.signal=ctl.signal;
+  fetch(N8N_PREVIEW_WEBHOOK,opts)
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);fForm.hidden=true;boxOk.hidden=false})
+    .catch(function(){showMsg(MSG_FAIL[lang])})
+    .then(function(){clearTimeout(t);busy=false;btnGo.disabled=false;updateUI()});
+}
+
+fu.addEventListener('input',function(){fu.setCustomValidity('')});
+fe.addEventListener('input',function(){fe.setCustomValidity('')});
+fp.addEventListener('change',function(){updateUI();hideMsg()});
+fForm.addEventListener('submit',function(e){
+  e.preventDefault();if(busy)return;hideMsg();
+  var u=clean(fu.value);
+  if(!HANDLE.test(u)){fu.setCustomValidity(ERR[lang]);fu.reportValidity();return}
+  var c=clean(fc.value);if(!HANDLE.test(c))c='';
+  var p=fp.value;
+  if(p==='single'){goCheckout(LEMON_67_URL,{instagram_username:u,competitor:c});return}
+  if(p==='agency'){goCheckout(LEMON_147_URL,{instagram_username:u});return}
+  var em=fe.value.trim();
+  if(!EMAIL.test(em)){fe.setCustomValidity(ERR_EMAIL[lang]);fe.reportValidity();return}
+  sendPreview({username:u,competitor:c,email:em,lang:lang});
+});
+document.getElementById('again').addEventListener('click',function(){boxOk.hidden=true;fForm.hidden=false;fForm.reset();updateUI()});
+document.querySelectorAll('[data-plan]').forEach(function(a){a.addEventListener('click',function(){fp.value=a.dataset.plan;updateUI();hideMsg()})});
+document.querySelectorAll('.fq').forEach(function(b){b.addEventListener('click',function(){var o=b.parentElement.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
+
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+  var fo=new IntersectionObserver(function(en){document.getElementById('sb').classList.toggle('on',!en[0].isIntersecting&&window.scrollY>300)},{threshold:0});
+  fo.observe(document.getElementById('solicitar'));
+}else{document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')})}
 </script>
 </body>
 </html>
