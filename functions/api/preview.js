@@ -6,7 +6,7 @@ export async function onRequestPost(context) {
     // 2. URL de destino do seu n8n via Ngrok
     const n8nWebhookUrl = "https://marlin-antirust-flagship.ngrok-free.dev/webhook/datalab-preview";
 
-    // 3. O servidor da Cloudflare envia direto para o seu n8n
+    // 3. O servidor da Cloudflare envia para o n8n e aguarda o relatório pronto
     const response = await fetch(n8nWebhookUrl, {
       method: "POST",
       headers: {
@@ -16,11 +16,27 @@ export async function onRequestPost(context) {
       body: requestData
     });
 
-    // 4. Retorna sucesso imediato para o navegador
-    return new Response(JSON.stringify({ status: "success", message: "Enviado com sucesso" }), {
+    const responseText = await response.text();
+
+    // 4. Se o Ngrok/n8n estiver offline ou retornar erro, devolve JSON de erro limpo
+    if (!response.ok) {
+      return new Response(
+        JSON.stringify({ status: "error", upstreamStatus: response.status, message: "Upstream error" }),
+        {
+          status: 502,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+    }
+
+    // 5. Repassa o JSON real gerado pelo n8n diretamente para o navegador
+    return new Response(responseText, {
       status: 200,
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*"
       }
     });
@@ -35,7 +51,6 @@ export async function onRequestPost(context) {
   }
 }
 
-// Responde requisições de teste OPTIONS (CORS) caso ocorram
 export async function onRequestOptions() {
   return new Response(null, {
     status: 204,
